@@ -1,7 +1,7 @@
 import React, {useMemo} from "react";
 import { useSelector } from "react-redux";
 import { selectCheckObj } from "./../redux/store";
-import SignUpForm from '../functions/SignUpForm'
+import SignUpForm from './forms/SignUpForm'
 
 import Message from './Message';
 

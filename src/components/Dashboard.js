@@ -7,7 +7,6 @@ import {addDataToLocalstorage} from './../functions/addDataToLocalstorage'
 function Dashboard() {
 
     const user = useSelector(selectUser);
-
     addDataToLocalstorage(user);
 
     const dispatch = useDispatch();

@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Input from "../components/inputs/Input";
-import Submit from "../components/inputs/Submit";
-import { handleSignIn, handleSignUp } from "./handleSignUp";
+import Input from "../inputs/Input";
+import Submit from "../inputs/Submit";
+import { handleSignIn, handleSignUp } from "../../functions/handleSignUp";
 import { useDispatch } from "react-redux";
 
 

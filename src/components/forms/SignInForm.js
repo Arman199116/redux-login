@@ -1,11 +1,11 @@
 import { useDispatch } from "react-redux";
-import { handleSubmit } from "./../functions/formSubmit";
+import { handleSubmit } from "../../functions/formSubmit";
 import { Link } from "react-router-dom";
-import Input from "./../components/inputs/Input";
-import { handleSignUp } from "./../functions/handleSignUp";
-import Submit from "./../components/inputs/Submit";
+import Input from "../inputs/Input";
+import { handleSignUp } from "../../functions/handleSignUp";
+import Submit from "../inputs/Submit";
 
-export const MemoForm = () => {
+export const SignInForm = () => {
     const dispatch = useDispatch();
     return (
         <form onSubmit={(e) => handleSubmit(e, dispatch)}>

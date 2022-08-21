@@ -1,12 +1,12 @@
 import React, { useMemo } from "react";
 import { useSelector } from "react-redux";
 import { selectCheckObj } from "./../redux/store";
-import { MemoForm } from "./../functions/memoForm";
+import { SignInForm } from "./forms/SignInForm";
 import Message from "./../components/Message";
 
 function Login() {
     const {incorrectEmOrPass} = useSelector(selectCheckObj);
-    let MmemoForm = useMemo(() => <MemoForm />, []);
+    let MemoForm = useMemo(() => <SignInForm />, []);
     return (
         <div className="app">
             <div className="login-form">
@@ -16,7 +16,7 @@ function Login() {
                         message="Incorrect Email or Password"
                         show={incorrectEmOrPass}
                     />
-                    { MmemoForm  }
+                    { MemoForm }
                 </div>
             </div>
         </div>
