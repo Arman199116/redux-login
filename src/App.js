@@ -1,43 +1,27 @@
-import React, { useState, useEffect } from "react";
-import RenderForm from "./RenderForm";
+import React from "react";
+import { useSelector } from "react-redux";
 import './App.css';
+import { selectIsExists, selectSignUp } from "./redux/store";
+import Login from "./components/Login";
+import Dashboard from './components/Dashboard';
+import SignUp from "./components/SignUp";
 
 
 function App() {
 
-    const [message, setMessage] = useState('');
-    const [isSubmitted, setIsSubmitted] = useState(false);
-
-
-    const handleSubmit = (event) => {
-        event.preventDefault();
-
-        let { email, password, checkbox } = document.forms[0];
-        const userData = JSON.parse(localStorage.getItem(email.value)); //database.find((user) => user.useremail === userEmail.value);
-
-        if (userData) {
-            if (userData.password !== password.value) {
-                setMessage('Invalid User Email or Password');
-            } else {
-                setMessage('');
-                setIsSubmitted(true);
-            }
-        } else {
-            checkbox.checked && localStorage.setItem(email.value, JSON.stringify({email : email.value, password : password.value}));
-            setMessage('You are new Registred');
-        }
-        console.log('count');
-    };
+    const isExists = useSelector(selectIsExists);
+    const signUp = useSelector(selectSignUp);
 
     return (
-        <div className="app">
-            <div className="login-form">
-                <div className="title">Sign In</div>
-                <p className="error">{message}</p>
-                {isSubmitted ? <div>User is successfully logged in</div> : <RenderForm handleSubmit={handleSubmit} />}
-            </div>
-        </div>
+        <>
+            {   signUp ?
+                    <SignUp />
+                : isExists ?
+                    <Dashboard />
+                : <Login  />
+            }
+        </>
     );
 }
 
-export default App;
+export default  (App);
