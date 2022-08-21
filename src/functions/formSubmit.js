@@ -1,5 +1,5 @@
 import {getData} from './getData';
-import { setUserState, incorrectData } from './../redux/store';
+import { setUserState, signUp } from './../redux/store';
 
 export const handleSubmit = (e, dispatch) => {
     e.preventDefault();
@@ -16,7 +16,7 @@ export const handleSubmit = (e, dispatch) => {
             return;
         } 
     }
-    dispatch(incorrectData({
+    dispatch(signUp({
         type : 'INCORRECT',
         incorrectEmOrPass : true
     }));

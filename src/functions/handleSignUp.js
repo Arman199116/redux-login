@@ -16,18 +16,17 @@ export const handleSignUp = (e, dispach) => {
             signUpIsIncorrect : true
         }));
         return;
-    } else {
-        dispach(signUp({
-            type : 'SIGNUPISINCORRECT',
-            signUpIsIncorrect : false
-        }));
     }
+    dispach(signUp({
+        type : 'SIGNUPISINCORRECT',
+        signUpIsIncorrect : false
+    }));
+
     let data = {name : name?.value, email : email?.value, password : password?.value };
     addDataToLocalstorage({data, dispach});
 }
 
 export const handleSignIn = (e, dispach) => {
-
     e.preventDefault();
     dispach(signUp({
         type : 'SIGNUP',

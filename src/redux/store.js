@@ -8,13 +8,14 @@ const userState = createSlice({
             name : '',
             email : '',
             password : '',
-            isLoggedIn : false
         },
-        isExists : false,
-        incorrectEmOrPass : false,
-        signUp : false,
-        signUpIsIncorrect : false,
-        succesRegister : false
+        check : {
+            isExists : false,
+            incorrectEmOrPass : false,
+            signUp : false,
+            signUpIsIncorrect : false,
+            succesRegister : false
+        }
     },
 
     reducers : {
@@ -22,17 +23,9 @@ const userState = createSlice({
             switch (action.payload.type) {
                 case 'ADD':
                     state.user = action.payload.user;
-                    state.incorrectEmOrPass = false;
-                    state.isExists = true;
-                    state.signUp = false;
-                    state.signUpIsIncorrect = false;
-                    state.succesRegister = false;
-                    break;
-                case 'CHANGE':
-                    state.user.isLoggedIn = action.payload.isLoggedIn;
-                    break;
-                case 'SHOW':
-                    state.isExists = action.payload.isExists;
+                    state.check.incorrectEmOrPass = false;
+                    state.check.isExists = true;
+                    state.check.signUp = false;
                     break;
                 default:
                     break;
@@ -46,18 +39,8 @@ const userState = createSlice({
                         name : '',
                         email : '',
                         password : '',
-                        isLoggedIn : false
                     };
-                    state.isExists = false;
-                    break;
-                default:
-                    break;
-            }
-        },
-        incorrectData : (state, action) => {
-            switch (action.payload.type) {
-                case 'INCORRECT':
-                    state.incorrectEmOrPass = action.payload.incorrectEmOrPass;
+                    state.check.isExists = false;
                     break;
                 default:
                     break;
@@ -66,13 +49,16 @@ const userState = createSlice({
         signUp : (state, action) => {
             switch (action.payload.type) {
                 case 'SIGNUP':
-                    state.signUp = action.payload.signUp;
+                    state.check.signUp = action.payload.signUp;
                     break;
                 case 'SIGNUPISINCORRECT':
-                    state.signUpIsIncorrect = action.payload.signUpIsIncorrect;
+                    state.check.signUpIsIncorrect = action.payload.signUpIsIncorrect;
                     break;
                 case 'SUCCESREGISTER':
-                    state.succesRegister = action.payload.succesRegister;
+                    state.check.succesRegister = action.payload.succesRegister;
+                    break;
+                case 'INCORRECT':
+                    state.check.incorrectEmOrPass = action.payload.incorrectEmOrPass;
                     break;
                 default:
                     break;
@@ -83,15 +69,8 @@ const userState = createSlice({
 })
 
 export const selectUser = (state) => state.user;
-export const selectUserIsLoggedIn = (state) => state.user.isLoggedIn;
-export const selectUserEmail = (state) => state.user.email;
-export const selectIsExists = (state) => state.isExists;
-export const selectIsincorrect = (state) => state.incorrectEmOrPass;
-export const selectSignUp = (state) => state.signUp;
-export const selectSignUpIsIncorrect = (state) => state.signUpIsIncorrect;
-export const selectSignUpIscorrect = (state) => state.succesRegister;
-
-export const {setUserState, clearStateUser, incorrectData, signUp} = userState.actions;
+export const selectCheckObj = (state) => state.check;
+export const {setUserState, clearStateUser, signUp} = userState.actions;
 const store = configureStore({reducer : userState.reducer });
 
 export default store;
