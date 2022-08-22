@@ -14,8 +14,10 @@ const userState = createSlice({
             incorrectEmOrPass : false,
             signUp : false,
             signUpIsIncorrect : false,
-            succesRegister : false
-        }
+            succesRegister : false,
+            isLoading : false,
+            isEmailInvalid : false
+        },
     },
 
     reducers : {
@@ -63,14 +65,23 @@ const userState = createSlice({
                 default:
                     break;
             }
-        }
+        },
+        showLoading : (state, action) => {
+            switch (action.payload.type) {
+                case 'SHOwLOADING':
+                    state.check.isLoading = action.payload.isLoading
+                    break;
+                default:
+                    break;
+            }
+        },
     }
 
 })
 
 export const selectUser = (state) => state.user;
 export const selectCheckObj = (state) => state.check;
-export const {setUserState, clearStateUser, signUp} = userState.actions;
+export const {setUserState, clearStateUser, signUp, showLoading} = userState.actions;
 const store = configureStore({reducer : userState.reducer });
 
 export default store;
