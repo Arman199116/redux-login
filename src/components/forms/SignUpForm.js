@@ -3,14 +3,14 @@ import { Link } from "react-router-dom";
 import Input from "../inputs/Input";
 import Submit from "../inputs/Submit";
 import { handleSignUp } from "../../functions/handleSignUp";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { signUp } from "./../../redux/store";
 
 
 function MemoSignUp() {
     const dispatch = useDispatch();
 
-    return (     
+    return (
         <form onSubmit={ (e) => { handleSignUp(e, dispatch)} }>
             <Input name="Name" type="text" />
             <Input name="Email" type="email" />
@@ -27,10 +27,8 @@ function MemoSignUp() {
             >
                 <p><small>Already have an account?</small>
                 <Link to="/">Log In</Link></p>
-            </div>      
-               
+            </div>
             <Submit value="Submit1" />
-           
         </form>
     );
 }

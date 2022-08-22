@@ -9,6 +9,7 @@ function Login() {
     const {incorrectEmOrPass, isLoading} = useSelector(selectCheckObj);
 
     let MemoForm = useMemo(() => <SignInForm />, []);
+    
     return (
         <div className="app">
             <div className="login-form">
@@ -26,6 +27,7 @@ function Login() {
                                 show={incorrectEmOrPass}
                             />
                             { MemoForm }
+                            {console.log(333333333)}
                         </>
                     )
                 }

@@ -13,10 +13,7 @@ const userState = createSlice({
             isExists : false,
             incorrectEmOrPass : false,
             signUp : false,
-            signUpIsIncorrect : false,
-            succesRegister : false,
             isLoading : false,
-            isEmailInvalid : false
         },
     },
 
@@ -53,12 +50,6 @@ const userState = createSlice({
                 case 'SIGNUP':
                     state.check.signUp = action.payload.signUp;
                     break;
-                case 'SIGNUPISINCORRECT':
-                    state.check.signUpIsIncorrect = action.payload.signUpIsIncorrect;
-                    break;
-                case 'SUCCESREGISTER':
-                    state.check.succesRegister = action.payload.succesRegister;
-                    break;
                 case 'INCORRECT':
                     state.check.incorrectEmOrPass = action.payload.incorrectEmOrPass;
                     break;
@@ -68,7 +59,7 @@ const userState = createSlice({
         },
         showLoading : (state, action) => {
             switch (action.payload.type) {
-                case 'SHOwLOADING':
+                case 'SHOWLOADING':
                     state.check.isLoading = action.payload.isLoading
                     break;
                 default:

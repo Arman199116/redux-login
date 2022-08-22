@@ -4,13 +4,15 @@ import { setUserState, signUp, showLoading} from '../redux/store';
 export const handleSubmit = async (e, dispach) => {
     e.preventDefault();
 
-
     const { email, password } = e.target;
     let user = getData(email.value);
-   
+    dispach(signUp({
+        type : 'INCORRECT',
+        incorrectEmOrPass : false
+    }));
     function submitForm() {
         dispach(showLoading({
-            type : 'SHOwLOADING',
+            type : 'SHOWLOADING',
             isLoading : true
         }))
         return new Promise((resolve) => {
@@ -29,22 +31,26 @@ export const handleSubmit = async (e, dispach) => {
                 user : user
             }));
             dispach(showLoading({
-                type : 'SHOwLOADING',
+                type : 'SHOWLOADING',
                 isLoading : false
             }))
             return;
-        } 
+        }
         dispach(showLoading({
-            type : 'SHOwLOADING',
+            type : 'SHOWLOADING',
             isLoading : false
         }))
+        dispach(signUp({
+            type : 'INCORRECT',
+            incorrectEmOrPass : false
+        }));
     }
     dispach(signUp({
         type : 'INCORRECT',
         incorrectEmOrPass : true
     }));
     dispach(showLoading({
-        type : 'SHOwLOADING',
+        type : 'SHOWLOADING',
         isLoading : false
     }))
 }
