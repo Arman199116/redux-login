@@ -63,5 +63,80 @@ input[type="submit"]:hover {
 
 .errorMessage {
     color: red;
+}
+.span-container {
+    display: flex;
+    width: 100%;
+    gap: 100px;
+}
+.span-container2 {
+    display: flex;
+	align-items: center;
+    background-color: #EFF2F5;
+	border-radius: 8px;
+	margin-left: auto;
+	padding: 5px;
+	height: 20px;
+    
+}
+.days-span:hover {
+	background-color: #F8FAFD;
+}
+.days-span {	
+	background-color: #f1f1f1;
+	padding: 10px;
+	font-size: 12px;
+	border-radius: 8px;
+	cursor: pointer;
+}  
+.active {
+	background-color: #F8FAFD;
+}
+.container {
+    display: flex;
+    width: 100%;
+    gap: 100px;
+    padding: 50px;
+}
+.user-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    row-gap: 20px ;
+    align-items: center;
+    background-color: white;
+    padding: 2rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    height: 400px;
+    word-wrap: break-word;
+    color: rgb(93, 140, 146);
+}
+.chart-board {
+    padding: 2rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    height: 400px;
+}
+.loading-board {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    width: 660px;
+}
 
+
+@media screen and (max-width: 900px) {
+    .container {
+        flex-direction: column;
+        gap: 30px;
+    }
+    .span-container {
+        gap: 30px;
+    }
+    .span-container2 {
+        border-radius: 4px;
+        padding: 3px;
+        height: 10px;  
+    }
 }

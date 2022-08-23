@@ -14,7 +14,9 @@ const userState = createSlice({
             incorrectEmOrPass : false,
             signUp : false,
             isLoading : false,
+            isLoadin : false,
         },
+        chartDay : 1,
     },
 
     reducers : {
@@ -62,6 +64,18 @@ const userState = createSlice({
                 case 'SHOWLOADING':
                     state.check.isLoading = action.payload.isLoading
                     break;
+                case 'SHOWLOADIN':
+                    state.check.isLoadin = action.payload.isLoadin
+                    break;
+                default:
+                    break;
+            }
+        },
+        changeDays : (state, action) => {
+            switch (action.payload.type) {
+                case 'CHANGEDAYS':
+                    state.chartDay = action.payload.chartDay
+                    break;
                 default:
                     break;
             }
@@ -72,7 +86,7 @@ const userState = createSlice({
 
 export const selectUser = (state) => state.user;
 export const selectCheckObj = (state) => state.check;
-export const {setUserState, clearStateUser, signUp, showLoading} = userState.actions;
+export const {setUserState, clearStateUser, signUp, showLoading, changeDays} = userState.actions;
 const store = configureStore({reducer : userState.reducer });
 
 export default store;

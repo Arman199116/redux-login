@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import "./App.css";
 import { selectCheckObj } from "./redux/store";
 import Login from "./components/Login";
-import Dashboard from "./components/Dashboard";
+import Dashboard from "./components/dashboard/Dashboard";
 import SignUp from "./components/SignUp";
 
 function App() {

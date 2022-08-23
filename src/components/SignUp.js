@@ -20,17 +20,19 @@ function SignUp() {
         const {name, value} = e.target;
         setFormValues({...formValues, [name] : value})
     }
-    const handleSubmit = async (e) => {
+    const handleSubmit =  async (e) => {
         e.preventDefault();
        
         setFormErrors(validate(formValues));
+        setIsSubmit(true);
 
         let data = {
             name: formValues.name,
             email: formValues.email,
             password: formValues.password,
         };
-        if (Object.keys(formErrors).length === 0 && isSubmit) {
+        console.log(Object.keys(formErrors).length ,isSubmit);
+        if (Object.keys(formErrors).length === 0) {
             dispatch(
                 showLoading({
                     type: "SHOWLOADING",
@@ -48,7 +50,6 @@ function SignUp() {
             await submitForm();
             addDataToLocalstorage({ data });
         }
-        setIsSubmit(true);
         dispatch(
             showLoading({
                 type: "SHOWLOADING",
@@ -96,12 +97,7 @@ function SignUp() {
                     ) : (
                         <>
                             <Message show={Object.keys(formErrors).length === 0 && isSubmit} message='You just signed up' />
-                            <form
-                                onSubmit={(e) => {
-                                    handleSubmit(e);
-                                    //Object.keys(formErrors).length === 0 && isSubmit && handleSignUp(e, dispatch);
-                                }}
-                            >
+                            <form onSubmit={(e) => {handleSubmit(e) }} >
                                 <div className="input-container">
                                     <label>Name</label>
                                     <input
