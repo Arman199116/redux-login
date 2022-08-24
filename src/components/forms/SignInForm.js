@@ -1,19 +1,41 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { handleSubmit } from "../../functions/formSubmit";
 import { Link } from "react-router-dom";
-import { signUp } from "./../../redux/store";
+import { signUp, checkUserExists } from "./../../redux/store";
+import { useRef, useState } from "react";
 
 export const SignInForm = () => {
-    const dispach = useDispatch();
+    const inpRef = useRef();
+    const dispatch = useDispatch();
+    const [userEmail, setUserEmail] = useState('');
+    //console.log(user);
+     let user = useSelector(state => state.users[userEmail])
+     console.log(user);
+    // const handleSubmit = (e) => {
+    //     e.preventDefault();
+    //     const { email, password } = e.target;
+    //     if (user && user.email === email.value){
+    //         if (user.password == password.value) {
+    //             dispatch(checkUserExists({
+    //                 type : 'ISEXISTS',
+    //                 isExists : true
+    //             }))
+    //         }
+    //     }
+    // }
+    
+   
 
     return (
-        <form onSubmit={(e) => handleSubmit(e, dispach)}>
+        <form onSubmit={(e) => { handleSubmit(e, dispatch)} }>
 
             <div className="input-container">
                 <label>Name</label>
                 <input
+                    ref={inpRef}
                     type="email"
                     name="email"
+                    onChange={(e) => setUserEmail(e.target.value) }
                     required
                 />
             </div>
@@ -28,7 +50,7 @@ export const SignInForm = () => {
             <div
                 className="input-container"
                 onClick={(e) => {
-                    dispach(
+                    dispatch(
                         signUp({
                             type: "SIGNUP",
                             signUp: true,

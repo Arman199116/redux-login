@@ -6,7 +6,7 @@ import Message from "./../components/Message";
 import ClipLoader from 'react-spinners/ClipLoader';
 
 function Login() {
-    const {incorrectEmOrPass, isLoading} = useSelector(selectCheckObj);
+    const {incorrectEmOrPass, isLoading, } = useSelector(selectCheckObj);
 
     let MemoForm = useMemo(() => <SignInForm />, []);
     

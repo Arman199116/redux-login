@@ -1,14 +1,11 @@
 import { configureStore, createSlice } from '@reduxjs/toolkit';
+import thunk from 'redux-thunk';
 
 const userState = createSlice({
     name : "user",
 
     initialState : {
-        user : {
-            name : '',
-            email : '',
-            password : '',
-        },
+        users : {},
         check : {
             isExists : false,
             incorrectEmOrPass : false,
@@ -24,23 +21,27 @@ const userState = createSlice({
         setUserState : (state, action) => {
             switch (action.payload.type) {
                 case 'ADD':
-                    state.user = action.payload.user;
-                    state.check.incorrectEmOrPass = false;
-                    state.check.isExists = true;
-                    state.check.signUp = false;
-                    break;
+                    let a = action.payload.user.email;
+console.log(  a   );
+                    return {
+                        ...state,
+                        users: {
+                            ...state.users,
+                            [a] : action.payload.user,
+                        }
+                    }
                 case 'CHANGEEMAIL':
-                    state.user.email = action.payload.email;
+                    state.users[action.payload.email.old] = action.payload.email.new;
                     break;
                 default:
                     break;
 
             }
         },
-        clearStateUser : (state, action) => {
+        checkUserExists : (state, action) => {
             switch (action.payload.type) {
-                case 'DELETE':
-                    state.check.isExists = false;
+                case 'ISEXISTS':
+                    state.check.isExists = action.payload.isExists;
                     break;
                 default:
                     break;
@@ -87,7 +88,7 @@ const userState = createSlice({
 })
 
 export const selectCheckObj = (state) => state.check;
-export const {setUserState, clearStateUser, signUp, showLoading, changeDays} = userState.actions;
+export const {setUserState, checkUserExists, signUp, showLoading, changeDays} = userState.actions;
 const store = configureStore({
     reducer : userState.reducer ,
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({

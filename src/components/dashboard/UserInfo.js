@@ -4,7 +4,7 @@ import {  setUserState } from "../../redux/store";
 import { useSelector, useDispatch } from "react-redux";
 
 const UserInfo = ({handleSubmit}) => {
-    const user = useSelector(state => state.user);
+    const user = useSelector(state => state.users);
     const dispatch = useDispatch();
     const inputRef = useRef();
     const buttonRef = useRef();
@@ -38,7 +38,10 @@ const UserInfo = ({handleSubmit}) => {
                     if (validate(elInput.value)) {
                         dispatch(setUserState({
                             type : 'CHANGEEMAIL',
-                            email : elInput.value
+                            email : {
+                                new : elInput.value,
+                                old : user.email
+                            }
                         }))
                     }
                 }
@@ -58,7 +61,7 @@ const UserInfo = ({handleSubmit}) => {
             eltSubmit.removeEventListener('click', handleChangeEmail)     
         }
 
-    }, [emailMessage,dispatch, user.email])
+    }, [emailMessage, dispatch, user.email])
 
     return (
         <div className="user-info">

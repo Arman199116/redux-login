@@ -41,7 +41,7 @@ function ChartJS_2() {
             setData(dayData);
         }
        
-        //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
+    
 
     },[days]);
     useEffect(() => {

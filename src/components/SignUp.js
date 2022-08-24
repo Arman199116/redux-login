@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { selectCheckObj, signUp, showLoading  } from "./../redux/store";
+import {setUserState, selectCheckObj, signUp, showLoading  } from "./../redux/store";
 import ClipLoader from "react-spinners/ClipLoader";
 import Submit from "../components/inputs/Submit";
 import { Link } from "react-router-dom";
 import Message from './Message';
 import { getDatalocal } from "./../functions/getData";
-import {addDataToLocalstorage} from './../functions/addDataToLocalstorage'
+//import {addDataToLocalstorage} from './../functions/addDataToLocalstorage'
 
 function SignUp() {
     const dispatch = useDispatch();
@@ -33,8 +33,7 @@ function SignUp() {
         };
 
         if (Object.keys(formErrors).length === 0) {
-            dispatch(
-                showLoading({
+            dispatch(showLoading({
                     type: "SHOWLOADING",
                     isLoading: true,
                 })
@@ -47,7 +46,10 @@ function SignUp() {
                 });
             }
             await submitForm();
-            addDataToLocalstorage({ data });
+            dispatch(setUserState({
+                type : 'ADD',
+                user : data
+            }));
         }
         dispatch(
             showLoading({
