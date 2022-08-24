@@ -1,11 +1,12 @@
 import {getDatalocal} from './getData';
 import { setUserState, signUp, showLoading} from '../redux/store';
+import { useSelector } from "react-redux";
 
 export const handleSubmit = async (e, dispach) => {
     e.preventDefault();
 
     const { email, password } = e.target;
-    let user = getDatalocal(email.value);
+    let user = useSelector( state => state.users[email.value]);
     dispach(signUp({
         type : 'INCORRECT',
         incorrectEmOrPass : false
@@ -24,12 +25,7 @@ export const handleSubmit = async (e, dispach) => {
     await submitForm();
 
     if (user !== null) {
-        user = JSON.parse(user);
         if (password.value === user.password ) {
-            dispach(setUserState({
-                type : 'ADD',
-                user : user
-            }));
             dispach(showLoading({
                 type : 'SHOWLOADING',
                 isLoading : false

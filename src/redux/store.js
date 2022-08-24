@@ -4,11 +4,7 @@ const userState = createSlice({
     name : "user",
 
     initialState : {
-        user : {
-            name : '',
-            email : '',
-            password : '',
-        },
+        users : {},
         check : {
             isExists : false,
             incorrectEmOrPass : false,
@@ -24,13 +20,12 @@ const userState = createSlice({
         setUserState : (state, action) => {
             switch (action.payload.type) {
                 case 'ADD':
-                    state.user = action.payload.user;
+                    state.users[action.payload.user.email] = action.payload.user;
                     state.check.incorrectEmOrPass = false;
-                    state.check.isExists = true;
                     state.check.signUp = false;
                     break;
                 case 'CHANGEEMAIL':
-                    state.user.email = action.payload.email;
+                    state.users[action.payload.email.old] = action.payload.email.new;
                     break;
                 default:
                     break;

@@ -6,7 +6,7 @@ import Submit from "../components/inputs/Submit";
 import { Link } from "react-router-dom";
 import Message from './Message';
 import { getDatalocal } from "./../functions/getData";
-import {addDataToLocalstorage} from './../functions/addDataToLocalstorage'
+//import {addDataToLocalstorage} from './../functions/addDataToLocalstorage'
 
 function SignUp() {
     const dispatch = useDispatch();
@@ -47,7 +47,10 @@ function SignUp() {
                 });
             }
             await submitForm();
-            addDataToLocalstorage({ data });
+            dispach(setUserState({
+                type : 'ADD',
+                user : data
+            }));
         }
         dispatch(
             showLoading({

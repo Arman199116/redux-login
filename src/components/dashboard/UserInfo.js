@@ -38,7 +38,10 @@ const UserInfo = ({handleSubmit}) => {
                     if (validate(elInput.value)) {
                         dispatch(setUserState({
                             type : 'CHANGEEMAIL',
-                            email : elInput.value
+                            email : {
+                                new : elInput.value,
+                                old : user.email
+                            }
                         }))
                     }
                 }
