@@ -1,11 +1,11 @@
-import {getData} from './getData';
+import {getDatalocal} from './getData';
 import { setUserState, signUp, showLoading} from '../redux/store';
 
 export const handleSubmit = async (e, dispach) => {
     e.preventDefault();
 
     const { email, password } = e.target;
-    let user = getData(email.value);
+    let user = getDatalocal(email.value);
     dispach(signUp({
         type : 'INCORRECT',
         incorrectEmOrPass : false

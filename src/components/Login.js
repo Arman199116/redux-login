@@ -15,21 +15,16 @@ function Login() {
             <div className="login-form">
                 <div className="title">Sign In</div>
                 <div className="form">
-                { isLoading ? (
-                        <div className="login-form">
-                            <ClipLoader color={'red'} size={120} />
-                            <p>Please wait</p>
-                        </div>
-                    ) : (
-                        <>
-                            <Message
-                                message="Incorrect Email or Password"
-                                show={incorrectEmOrPass}
-                            />
-                            { MemoForm }
-                        </>
-                    )
-                }
+                    <div className="login-form" style={{display : isLoading ? 'block' : 'none'}}>
+                        <ClipLoader color={'red'} size={120} />
+                        <p>Please wait</p>
+                    </div>
+                  
+                    <div style={{display : !isLoading ? 'block' : 'none'}}>
+                        <Message message="Incorrect Email or Password" show={incorrectEmOrPass} />
+                        { MemoForm }
+                    </div>
+                    
                 </div>
             </div>
         </div>

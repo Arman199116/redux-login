@@ -5,7 +5,7 @@ import ClipLoader from "react-spinners/ClipLoader";
 import Submit from "../components/inputs/Submit";
 import { Link } from "react-router-dom";
 import Message from './Message';
-import { getData } from "./../functions/getData";
+import { getDatalocal } from "./../functions/getData";
 import {addDataToLocalstorage} from './../functions/addDataToLocalstorage'
 
 function SignUp() {
@@ -31,7 +31,7 @@ function SignUp() {
             email: formValues.email,
             password: formValues.password,
         };
-        console.log(Object.keys(formErrors).length ,isSubmit);
+
         if (Object.keys(formErrors).length === 0) {
             dispatch(
                 showLoading({
@@ -40,7 +40,6 @@ function SignUp() {
                 })
             );
             function submitForm() {
-       
                 return new Promise((resolve) => {
                     setTimeout(() => {
                         resolve();
@@ -68,7 +67,7 @@ function SignUp() {
             errors.email = "Email is Required";
         } else if (!regex.test(values.email)) {
             errors.email = "Not valid email";
-        } else if (getData(values.email)) {
+        } else if (getDatalocal(values.email)) {
             errors.email = "User email is used";
         }
         if (!values.passrepeat) {
@@ -89,15 +88,15 @@ function SignUp() {
             <div className="login-form">
                 <div className="title">Sign Up</div>
                 <div className="form">
-                    {isLoading ? (
-                        <div className="login-form">
+                    
+                        <div className="login-form" style={{display : isLoading ? 'block' : 'none'}}>
                             <ClipLoader color={"red"} size={120} />
                             <p>Please wait</p>
                         </div>
-                    ) : (
-                        <>
+                   
+                       
                             <Message show={Object.keys(formErrors).length === 0 && isSubmit} message='You just signed up' />
-                            <form onSubmit={(e) => {handleSubmit(e) }} >
+                            <form onSubmit={(e) => {handleSubmit(e) }} style={{display : !isLoading ? 'block' : 'none'}} >
                                 <div className="input-container">
                                     <label>Name</label>
                                     <input
@@ -156,8 +155,7 @@ function SignUp() {
                                 </div>
                                 <Submit value="Submit1" />
                             </form>
-                        </>
-                    )}
+                      
                 </div>
             </div>
         </div>

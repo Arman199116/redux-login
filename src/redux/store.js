@@ -17,6 +17,7 @@ const userState = createSlice({
             isLoadin : false,
         },
         chartDay : 1,
+        chartData : {}
     },
 
     reducers : {
@@ -28,6 +29,9 @@ const userState = createSlice({
                     state.check.isExists = true;
                     state.check.signUp = false;
                     break;
+                case 'CHANGEEMAIL':
+                    state.user.email = action.payload.email;
+                    break;
                 default:
                     break;
 
@@ -36,11 +40,6 @@ const userState = createSlice({
         clearStateUser : (state, action) => {
             switch (action.payload.type) {
                 case 'DELETE':
-                    state.user = {
-                        name : '',
-                        email : '',
-                        password : '',
-                    };
                     state.check.isExists = false;
                     break;
                 default:
@@ -76,6 +75,9 @@ const userState = createSlice({
                 case 'CHANGEDAYS':
                     state.chartDay = action.payload.chartDay
                     break;
+                case 'ADDNEWDATA':
+                    state.chartData[action.payload.data.day] = action.payload.data.value 
+                    break;
                 default:
                     break;
             }
@@ -84,9 +86,13 @@ const userState = createSlice({
 
 })
 
-export const selectUser = (state) => state.user;
 export const selectCheckObj = (state) => state.check;
 export const {setUserState, clearStateUser, signUp, showLoading, changeDays} = userState.actions;
-const store = configureStore({reducer : userState.reducer });
+const store = configureStore({
+    reducer : userState.reducer ,
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware({
+        serializableCheck: false,
+    })
+});
 
 export default store;

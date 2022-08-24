@@ -13,7 +13,6 @@ function Graph() {
 
     useEffect(() => {
         getData(days).then(val => {
-          
             setData(val.prices)
         });
     },[days]);

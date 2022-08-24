@@ -1,3 +1,3 @@
-export const getData = (email) => {
+export const getDatalocal = (email) => {
     return localStorage.getItem(email);
 }
