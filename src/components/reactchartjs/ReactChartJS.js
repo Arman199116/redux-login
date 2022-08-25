@@ -15,12 +15,12 @@ function ChartJS_2() {
     const days = useSelector(state => state.chartDay);
 
     let dayData = useSelector(state => state.chartData[days]);
-    
+
     const [data, setData] = useState({
         labels: [],
         datasets: [],
     });
-    
+
     const HeaderSpans = useMemo(() => <HeaderToolBar />, [])
     const lineChartJS = useMemo(() => <Line data={data} options={optionsChartjs_2} height={300} width={600}  />, [data])
     useEffect(() => {
@@ -40,25 +40,23 @@ function ChartJS_2() {
         } else {
             setData(dayData);
         }
-       
-        //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
 
-    },[days]);
+    },[days, dispatch, dayData]);
     useEffect(() => {
         setIsloading(false);
     },[data]);
-    
+
     return (
-        <> 
-            <div className="loading-board"  style={{display: isLoading ? 'block' : 'none'}} >
+        <>
+            <div className="loading-board"   >
                 <ClipLoader color={'red'} size={100} />
                 <p>Please wait</p>
             </div>
 
-            <div id="chart" className='chart-board' style={{display: !isLoading ? 'block' : 'none' }}>
-                { HeaderSpans }
+            {/* <div id="chart" className='chart-board' style={{display: !isLoading ? 'block' : 'none' }}>
+                { HeaderSpans }style={{display: isLoading ? 'block' : 'none'}}
                 { lineChartJS }
-            </div>
+            </div> */}
         </>
     );
 }

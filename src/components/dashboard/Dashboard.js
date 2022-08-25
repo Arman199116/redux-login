@@ -1,13 +1,16 @@
 import React  from "react";
 import { useDispatch } from "react-redux";
-import { clearStateUser } from "../../redux/store";
+import { checkUserExists } from "../../redux/store";
 import UserInfo from "./UserInfo";
 import ChartJS from "./../reactchartjs/ReactChartJS";
 
 function Dashboard() {
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(clearStateUser({type : "DELETE"}));
+        dispatch(checkUserExists({
+            type : "ISEXISTS",
+            isExists : false
+        }));
     }
     const dispatch = useDispatch();
 

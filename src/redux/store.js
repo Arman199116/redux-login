@@ -1,10 +1,12 @@
 import { configureStore, createSlice } from '@reduxjs/toolkit';
+//import { current } from '@reduxjs/toolkit'
 
 const userState = createSlice({
     name : "user",
 
     initialState : {
-        users : {},
+        users : [],
+        currentUser : {},
         check : {
             isExists : false,
             incorrectEmOrPass : false,
@@ -19,23 +21,19 @@ const userState = createSlice({
     reducers : {
         setUserState : (state, action) => {
             switch (action.payload.type) {
-                case 'ADD':
-                    state.users[action.payload.user.email] = action.payload.user;
-                    state.check.incorrectEmOrPass = false;
-                    state.check.signUp = false;
-                    break;
-                case 'CHANGEEMAIL':
-                    state.users[action.payload.email.old] = action.payload.email.new;
-                    break;
+                case 'ADDUSER':
+                    state.users.push(action.payload.user)
+                   //console.table(  current(state.users)   );
+                    break;  
                 default:
                     break;
 
             }
         },
-        clearStateUser : (state, action) => {
+        checkUserExists : (state, action) => {
             switch (action.payload.type) {
-                case 'DELETE':
-                    state.check.isExists = false;
+                case 'ISEXISTS':
+                    state.check.isExists = action.payload.isExists;
                     break;
                 default:
                     break;
@@ -77,12 +75,35 @@ const userState = createSlice({
                     break;
             }
         },
+        currentUser : (state, action) => {
+            switch (action.payload.type) {
+                case 'ADDCURRENTUSER': {
+                    state.currentUser = action.payload.user;
+                    break;
+                }
+                case 'CHANGEEMAIL': {
+                    const {newEmail, oldEmail} = action.payload.email;
+
+                    return {
+                        ...state,
+                        users : state.users.map((data) => {
+                            if (data.email === oldEmail) {
+                                return {...data, email : newEmail};
+                            }
+                            return data;
+                        })
+                    }
+                }
+                default:
+                    break;
+            }
+        },
     }
 
 })
-
+//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
 export const selectCheckObj = (state) => state.check;
-export const {setUserState, clearStateUser, signUp, showLoading, changeDays} = userState.actions;
+export const {setUserState, checkUserExists, signUp, showLoading, changeDays, currentUser} = userState.actions;
 const store = configureStore({
     reducer : userState.reducer ,
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({

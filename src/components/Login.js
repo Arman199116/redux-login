@@ -6,7 +6,7 @@ import Message from "./../components/Message";
 import ClipLoader from 'react-spinners/ClipLoader';
 
 function Login() {
-    const {incorrectEmOrPass, isLoading} = useSelector(selectCheckObj);
+    const {incorrectEmOrPass, isLoading, } = useSelector(selectCheckObj);
 
     let MemoForm = useMemo(() => <SignInForm />, []);
     
@@ -19,12 +19,11 @@ function Login() {
                         <ClipLoader color={'red'} size={120} />
                         <p>Please wait</p>
                     </div>
-                  
+
                     <div style={{display : !isLoading ? 'block' : 'none'}}>
                         <Message message="Incorrect Email or Password" show={incorrectEmOrPass} />
                         { MemoForm }
                     </div>
-                    
                 </div>
             </div>
         </div>

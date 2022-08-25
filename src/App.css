@@ -1,3 +1,7 @@
+* {
+    margin: 0;
+    padding: 0;
+}
 .app {
     font-family: sans-serif;
     display: flex;
@@ -26,7 +30,7 @@ input[type="submit"] {
 }
 
 input[type="submit"]:hover {
-      background: #6cf0c2;
+    background: #6cf0c2;
 }
 
 .button-container {
@@ -41,7 +45,7 @@ input[type="submit"]:hover {
 }
 
 .list-container {
-      display: flex;
+    display: flex;
 }
 
 .error {
@@ -71,34 +75,37 @@ input[type="submit"]:hover {
 }
 .span-container2 {
     display: flex;
-	align-items: center;
+    align-items: center;
     background-color: #EFF2F5;
-	border-radius: 8px;
-	margin-left: auto;
-	padding: 5px;
-	height: 20px;
-    
+    border-radius: 8px;
+    margin-left: auto;
+    padding: 5px;
+    height: 20px;
 }
 .days-span:hover {
-	background-color: #F8FAFD;
+    background-color: #F8FAFD;
 }
-.days-span {	
-	background-color: #f1f1f1;
-	padding: 10px;
-	font-size: 12px;
-	border-radius: 8px;
-	cursor: pointer;
-}  
+.days-span {
+    background-color: #f1f1f1;
+    padding: 10px;
+    font-size: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+}
 .active {
-	background-color: #F8FAFD;
+    background-color: #F8FAFD;
 }
 .container {
-    display: flex;
+    display: grid;
+    grid-template-areas:
+    'left1 rigth1 rigth1';
+    gap: 30px;
+    padding: 30px;
+    height: 400px;
     width: 100%;
-    gap: 100px;
-    padding: 50px;
 }
 .user-info {
+    grid-area: left1;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -107,31 +114,57 @@ input[type="submit"]:hover {
     background-color: white;
     padding: 2rem;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    width: 300px;
-    height: 400px;
     word-wrap: break-word;
     color: rgb(93, 140, 146);
 }
 .chart-board {
+    grid-area: rigth1;
     padding: 2rem;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    height: 400px;
-    
 }
 .loading-board {
+    grid-area: rigth1;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    padding: 20px;
+    margin-right: 60px;
 }
-
+.icon-container {
+    display: flex;
+    border: 1px solid black;
+    align-items: center;
+    justify-content: center;
+}
+.input-text {
+    padding: 5px;
+    border: none;
+    font-size: 20px;
+    width: 130px;
+}
+.input-text:focus {
+    outline: none;
+}
+.icon {
+    margin-left: 10px;
+    font-size: 25px;
+    cursor: pointer;
+    margin-right: 10px;
+  }
 
 @media screen and (max-width: 900px) {
     .container {
         flex-direction: column;
         gap: 30px;
+        grid-template-areas: 'left1 left1 left1'
+                             'rigth1 rigth1 rigth1';
+    }
+    .container > * {
+        margin-right: 30px;
+    }
+    .loading-board {
+        height: 300px ;
     }
     .span-container {
         gap: 30px;
