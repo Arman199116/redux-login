@@ -1,11 +1,12 @@
 import { configureStore, createSlice } from '@reduxjs/toolkit';
-import thunk from 'redux-thunk';
+import { current } from '@reduxjs/toolkit'
 
 const userState = createSlice({
     name : "user",
 
     initialState : {
-        users : {},
+        users : [],
+        currentUser : {},
         check : {
             isExists : false,
             incorrectEmOrPass : false,
@@ -20,19 +21,10 @@ const userState = createSlice({
     reducers : {
         setUserState : (state, action) => {
             switch (action.payload.type) {
-                case 'ADD':
-                    let a = action.payload.user.email;
-console.log(  a   );
-                    return {
-                        ...state,
-                        users: {
-                            ...state.users,
-                            [a] : action.payload.user,
-                        }
-                    }
-                case 'CHANGEEMAIL':
-                    state.users[action.payload.email.old] = action.payload.email.new;
-                    break;
+                case 'ADDUSER':
+                    state.users.push(action.payload.user)
+                   //console.table(  current(state.users)   );
+                    break;  
                 default:
                     break;
 
@@ -83,12 +75,34 @@ console.log(  a   );
                     break;
             }
         },
+        currentUser : (state, action) => {
+            switch (action.payload.type) {
+                case 'ADDCURRENTUSER': {  
+                    state.currentUser = action.payload.user;
+                    break;
+                }
+                case 'CHANGEEMAIL': {  
+
+                    const userIndex = state.users.findIndex(item => item.email === action.payload.email.old);
+                    const user = state.users.find(item => item.email === action.payload.email.old);
+                    console.log(current(user));
+                    user.email = action.payload.email.new;
+                    state.users.splice(userIndex, 1, user);
+
+                    return {
+                        ...state
+                    }
+                }
+                default:
+                    break;
+            }
+        },
     }
 
 })
-
+//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
 export const selectCheckObj = (state) => state.check;
-export const {setUserState, checkUserExists, signUp, showLoading, changeDays} = userState.actions;
+export const {setUserState, checkUserExists, signUp, showLoading, changeDays, currentUser} = userState.actions;
 const store = configureStore({
     reducer : userState.reducer ,
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({

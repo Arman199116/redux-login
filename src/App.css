@@ -126,7 +126,27 @@ input[type="submit"]:hover {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     padding: 20px;
 }
-
+.icon-container {
+    display: flex;
+    border: 1px solid black;
+    align-items: center;
+    justify-content: center;
+}
+.input-text {
+    padding: 5px;
+    border: none;
+    font-size: 20px;
+    width: 130px;
+}
+.input-text:focus {
+    outline: none;
+}
+.icon {
+    margin-left: 10px;
+    font-size: 25px;
+    cursor: pointer;
+    margin-right: 10px;
+  }
 
 @media screen and (max-width: 900px) {
     .container {

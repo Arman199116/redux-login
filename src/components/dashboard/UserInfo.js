@@ -1,80 +1,81 @@
-import React, {useEffect, useRef, useState} from "react";
-import Submit from "../inputs/Submit";
-import {  setUserState } from "../../redux/store";
+import React, { useRef, useState} from "react";
+import { currentUser } from "../../redux/store";
 import { useSelector, useDispatch } from "react-redux";
+import { AiFillEdit } from 'react-icons/ai';
 
-const UserInfo = ({handleSubmit}) => {
-    const user = useSelector(state => state.users);
+const UserInfo = ({ handleSubmit }) => {
+    let user = useSelector(state => state.currentUser);
+
+    const [edit, setEdit] = useState(false);
+    const [newValue, setNewValue] = useState(user.email);
     const dispatch = useDispatch();
     const inputRef = useRef();
-    const buttonRef = useRef();
-    const submitRef = useRef();
 
     const [emailMessage, setEmailMessage] = useState('');
 
-    useEffect(() => {
-        let elInput = inputRef.current;
-        const elButton = buttonRef.current;
-        const eltSubmit = submitRef.current;
-        const handleShowInput = (e) => {
-            elInput.style.display = "block";
-            eltSubmit.style.display = "block";
-            elButton.style.display = "none";
-        }
+    const handleChange = (e) => {
+        e.preventDefault();
+        setEdit(true);
+
+    }
+
+    const handleEditEmail = (e) => {
+        e.preventDefault();
         const validate = (email) => {
             const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
-    
             if (!regex.test(email)) {
                 setEmailMessage("Not valid email")
                 return false;
             }
-            setEmailMessage("")
+            setEmailMessage("");
             return true;
         }
-        const handleChangeEmail = (e) => {
-            if (elInput.value) {
-                if (elInput.value !== user.email) {
-
-                    if (validate(elInput.value)) {
-                        dispatch(setUserState({
-                            type : 'CHANGEEMAIL',
-                            email : {
-                                new : elInput.value,
-                                old : user.email
-                            }
-                        }))
-                    }
+        if (newValue) {
+            if (newValue !== user.email) {
+                if (validate(newValue)) { console.log('zcxvsfdg');
+                    dispatch(currentUser({
+                        type : 'CHANGEEMAIL',
+                        email : {
+                            new : newValue,
+                            old : user.email
+                        }
+                    }));
+                    // dispatch(currentUser({
+                    //     type : 'ADDCURRENTUSER',
+                    //     user : user
+                    // }))
+                    setEdit(false)
+                    return;
                 }
-               
-            }
-
-            elInput.style.display = "none";
-            eltSubmit.style.display = "none";
-            elButton.style.display = "block";
-           
+            }        
         }
-        elButton.addEventListener('click', handleShowInput)
-        eltSubmit.addEventListener('click', handleChangeEmail);
-
-        return () => {
-            elButton.removeEventListener('click', handleShowInput)
-            eltSubmit.removeEventListener('click', handleChangeEmail)     
-        }
-
-    }, [emailMessage, dispatch, user.email])
+    }
 
     return (
-        <div className="user-info">
+        <form className="user-info" onSubmit={(e) => handleChange(e)}>
                 
             <h3>Welcome <span>{ user.name } </span></h3>
-            <span>Email { user.email }</span>
-            <input ref={inputRef} type='text' placeholder="Change email" style={{display : 'none'}}  />
-            <input ref={buttonRef} type="button" value="Change Email"  />
+            {
+                edit 
+                ?   <div className='icon-container'>
+                        <input ref={inputRef} type='text' value={newValue} className={'input-text'} onChange={(e) => setNewValue(e.target.value)} /> 
+                        <span className='icon' onClick={(e) => handleEditEmail(e)}>
+                            <AiFillEdit  />
+                        </span>
+                    </div>
+                :
+                    <div>Email { user.email }</div>  
+            }
+            
             <p style={{display : emailMessage ? 'block' : 'none'}}  >{emailMessage}</p>
-            <input ref={submitRef} type="button" value="Submit" style={{display: 'none'}}  />
-            <Submit value={'Logout'} handleSubmit={handleSubmit} />
+            <div className="button-container">
+                <input type="submit" value="Change Email"   />
+            </div>
 
+            <div className="button-container">
+            <input type="submit" value={"Logout"} onClick={(e) => handleSubmit(e) } />
         </div>
+        </form>
     )
 }
 

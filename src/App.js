@@ -9,7 +9,7 @@ import SignUp from "./components/SignUp";
 function App() {
     const { isExists, signUp } = useSelector(selectCheckObj);
 
-    return <>{1 ? <SignUp /> : 0 ? <Dashboard /> : <Login />}</>;
+    return <>{signUp ? <SignUp /> : isExists ? <Dashboard /> : <Login />}</>;
 }
 
 export default App;
