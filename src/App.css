@@ -100,7 +100,8 @@ input[type="submit"]:hover {
     grid-template-areas:
     'left1 rigth1 rigth1'
     'foothertable foothertable foothertable';
-    gap: 30px;
+    align-items: center;
+    justify-content: center;
     padding: 30px;
     height: 400px;
     width: 100%;
@@ -120,19 +121,33 @@ input[type="submit"]:hover {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     word-wrap: break-word;
     color: rgb(93, 140, 146);
+    height: 400px;
 }
 .chart-board {
     grid-area: rigth1;
     padding: 2rem;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    width: 600px;
+    height: 400px;
 }
 .loading-board {
     grid-area: rigth1;
+    display: grid;
+    justify-content: center;
+    align-items: center; 
+}
+
+.chard-load{
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.load-data {
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    width: 600px;
+    height: 400px;
 }
 .users-table {
     grid-area: foothertable;
@@ -141,6 +156,7 @@ input[type="submit"]:hover {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    margin-top: 30px;
     gap: 20px;
 }
 .icon-container {
@@ -170,6 +186,11 @@ input[type="submit"]:hover {
     align-items: center;
     gap: 20px;
     border: 1px solid black;
+    box-shadow: 0 4px 8px 0 #00000033, 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    width: 400px;
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 5px ;
 }
 .user-data > p{
     color: red;
@@ -186,7 +207,9 @@ input[type="submit"]:hover {
     margin-left: auto;
     order: 2;
 }
-
+convas {
+    width: 600px;
+}
 @media screen and (max-width: 900px) {
     .container {
         flex-direction: column;
@@ -195,9 +218,14 @@ input[type="submit"]:hover {
                              'rigth1 rigth1 rigth1'
                              'foothertable foothertable foothertable';
     }
-    .loading-board {
-        height: 300px ;
+    .container > * {
+        width: auto;
     }
+    .chart-board { 
+        width: auto;
+        height: auto;
+    }
+        
     .span-container {
         gap: 30px;
     }

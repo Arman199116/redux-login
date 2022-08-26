@@ -81,9 +81,15 @@ const userState = createSlice({
                     state.currentUser = action.payload.user;
                     break;
                 }
+                case 'CHANGECURRENTUSEREMAIL': {
+                    return {
+                        ...state,
+                        currentUser : {...state.currentUser, email : action.payload.email }
+                    }
+
+                }
                 case 'CHANGEEMAIL': {
                     const {newEmail, oldEmail} = action.payload.email;
-
                     return {
                         ...state,
                         users : state.users.map((data) => {

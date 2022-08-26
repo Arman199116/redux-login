@@ -9,7 +9,7 @@ function UsersTable() {
         <div  className="users-table" >
             {
                 usersList.map((item, i) => {
-                    return <User key={i} email={item.email} />
+                    return <User key={i} email={item.email} usersList={usersList} />
                 })
             }
          </div>

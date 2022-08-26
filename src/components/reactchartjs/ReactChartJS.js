@@ -22,7 +22,7 @@ function ChartJS_2() {
     });
 
     const HeaderSpans = useMemo(() => <HeaderToolBar />, [])
-    const lineChartJS = useMemo(() => <Line data={data} options={optionsChartjs_2} height={300} width={600}  />, [data])
+    const lineChartJS = useMemo(() => <Line data={data} options={optionsChartjs_2} />, [data])
     useEffect(() => {
         setIsloading(true)
         if (!dayData) {
@@ -47,17 +47,21 @@ function ChartJS_2() {
     },[data]);
 
     return (
-        <>
-            <div className="loading-board"   >
-                <ClipLoader color={'red'} size={100} />
-                <p>Please wait</p>
+        <div className='chard-load'>
+            <div className="loading-board" style={{display: isLoading ? 'block' : 'none'}}  >
+                <div className="load-data">
+                    <ClipLoader color={'red'} size={100} />
+                    <p>Please wait</p>
+                </div>
+              
+               
             </div>
 
-            {/* <div id="chart" className='chart-board' style={{display: !isLoading ? 'block' : 'none' }}>
-                { HeaderSpans }style={{display: isLoading ? 'block' : 'none'}}
+            <div id="chart" className='chart-board' style={{display: !isLoading ? 'block' : 'none' }}>
+                { HeaderSpans }
                 { lineChartJS }
-            </div> */}
-        </>
+            </div>
+        </div>
     );
 }
 

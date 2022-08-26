@@ -9,13 +9,12 @@ const UserInfo = ({ handleSubmit }) => {
     const [edit, setEdit] = useState(false);
     const [newValue, setNewValue] = useState(user.email);
     const dispatch = useDispatch();
-
     const [emailMessage, setEmailMessage] = useState('');
 
     const handleChange = (e) => {
         e.preventDefault();
         setEdit(true);
-
+        setNewValue(user.email);
     }
 
     const handleEditEmail = (e) => {
@@ -31,7 +30,7 @@ const UserInfo = ({ handleSubmit }) => {
         }
         if (newValue) {
             if (newValue !== user.email) {
-                if (validate(newValue)) { console.log('zcxvsfdg');
+                if (validate(newValue)) { 
                     dispatch(currentUser({
                         type : 'ADDCURRENTUSER',
                         user : {...user, email : newValue}
@@ -43,11 +42,11 @@ const UserInfo = ({ handleSubmit }) => {
                             oldEmail : user.email
                         }
                     }));
-                    setEdit(false);
-                    return;
+                    
                 }
-            }
+            } 
         }
+        setEdit(false);
     }
 
     return (
