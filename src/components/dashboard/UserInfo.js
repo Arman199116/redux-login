@@ -1,4 +1,4 @@
-import React, { useRef, useState} from "react";
+import React, { useState} from "react";
 import { currentUser } from "../../redux/store";
 import { useSelector, useDispatch } from "react-redux";
 import { AiFillEdit } from 'react-icons/ai';
@@ -9,7 +9,6 @@ const UserInfo = ({ handleSubmit }) => {
     const [edit, setEdit] = useState(false);
     const [newValue, setNewValue] = useState(user.email);
     const dispatch = useDispatch();
-    const inputRef = useRef();
 
     const [emailMessage, setEmailMessage] = useState('');
 
@@ -44,7 +43,7 @@ const UserInfo = ({ handleSubmit }) => {
                             oldEmail : user.email
                         }
                     }));
-                    setEdit(false)
+                    setEdit(false);
                     return;
                 }
             }
@@ -57,7 +56,7 @@ const UserInfo = ({ handleSubmit }) => {
             {
                 edit
                 ?   <div className='icon-container'>
-                        <input ref={inputRef} type='text' value={newValue} className={'input-text'} onChange={(e) => setNewValue(e.target.value)} /> 
+                        <input type='text' value={newValue} className={'input-text'} onChange={(e) => setNewValue(e.target.value)} /> 
                         <span className='icon' onClick={(e) => handleEditEmail(e)}>
                             <AiFillEdit  />
                         </span>

@@ -98,11 +98,15 @@ input[type="submit"]:hover {
 .container {
     display: grid;
     grid-template-areas:
-    'left1 rigth1 rigth1';
+    'left1 rigth1 rigth1'
+    'foothertable foothertable foothertable';
     gap: 30px;
     padding: 30px;
     height: 400px;
     width: 100%;
+}
+.container > * { 
+    margin-right: 60px;
 }
 .user-info {
     grid-area: left1;
@@ -129,7 +133,15 @@ input[type="submit"]:hover {
     align-items: center;
     flex-direction: column;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    margin-right: 60px;
+}
+.users-table {
+    grid-area: foothertable;
+    box-shadow: 0 4px 8px 0 #00000033, 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
 }
 .icon-container {
     display: flex;
@@ -151,17 +163,37 @@ input[type="submit"]:hover {
     font-size: 25px;
     cursor: pointer;
     margin-right: 10px;
-  }
+ }
+ .user-data {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    border: 1px solid black;
+}
+.user-data > p{
+    color: red;
+}
+.change-button {
+    margin: 0 auto;
+    padding: 0;
+    cursor: pointer;
+    font-size: 15px;
+    background: #1b1d1c;
+    border: 1px solid #01d28e;
+    color: #fff;
+    padding: 10px 20px;
+    margin-left: auto;
+    order: 2;
+}
 
 @media screen and (max-width: 900px) {
     .container {
         flex-direction: column;
         gap: 30px;
         grid-template-areas: 'left1 left1 left1'
-                             'rigth1 rigth1 rigth1';
-    }
-    .container > * {
-        margin-right: 30px;
+                             'rigth1 rigth1 rigth1'
+                             'foothertable foothertable foothertable';
     }
     .loading-board {
         height: 300px ;

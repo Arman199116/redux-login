@@ -5,8 +5,6 @@ import ClipLoader from "react-spinners/ClipLoader";
 import Submit from "../components/inputs/Submit";
 import { Link } from "react-router-dom";
 import Message from './Message';
-//import { getDatalocal } from "./../functions/getData";
-//import {addDataToLocalstorage} from './../functions/addDataToLocalstorage'
 
 function SignUp() {
     const dispatch = useDispatch();
