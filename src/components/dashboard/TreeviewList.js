@@ -4,6 +4,7 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import TreeView from '@material-ui/lab/TreeView';
 import { useSelector } from "react-redux";
 import Tree from "./treeview/Tree";
+import TreeItem from '@material-ui/lab/TreeItem';
 
 const TreeviewList = () => {
 
@@ -15,7 +16,9 @@ const TreeviewList = () => {
                 defaultExpandIcon={<ChevronRightIcon />}
                 defaultCollapseIcon={<ExpandMoreIcon />}
             >
-                <Tree data={state} />
+                <TreeItem  nodeId={`${Math.random()}`} label={'State'}>
+                    <Tree data={state} />
+                </TreeItem>
             </TreeView>
 
         </>
