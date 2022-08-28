@@ -6,18 +6,18 @@ import UsersTable from "./UsersTable";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import DragDrop from "./DragDrop";
 import TreeviewList from "./TreeviewList";
-import { useSelector } from "react-redux";
+
 
 function Dashboard() {
 
-    let list = useSelector((state => state))
+    
 
     
     let charactersId = [
         { classN  : "container-userinfo", components : useMemo(() => <UserInfo />,[]), draggableId : 'userInfo', index : 0 }, 
         { classN  : "container-chart", components : useMemo(() => <ChartJS />,[]), draggableId : 'chartBoard', index : 1 },
         { classN  : "container-table", components : useMemo(() => <UsersTable />,[]), draggableId : 'UsersLists', index : 2 },
-        { classN  : "container-state-data", components : useMemo(() => <TreeviewList list={list} />,[list] ), draggableId : 'viewTree', index : 3 }
+        { classN  : "container-state-data", components : useMemo(() => <TreeviewList/>,[] ), draggableId : 'viewTree', index : 3 }
     ];
 
     let [characters, setCharacters] = useState(charactersId);
@@ -33,6 +33,7 @@ function Dashboard() {
     return (
 
         <DragDropContext onDragEnd={handleOnDragEnd} >
+
             <Droppable droppableId="characters">
                 {
                     (provided) => (

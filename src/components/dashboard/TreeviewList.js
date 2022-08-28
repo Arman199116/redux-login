@@ -1,47 +1,21 @@
 import React from "react";
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import TreeItem from '@material-ui/lab/TreeItem';
 import TreeView from '@material-ui/lab/TreeView';
+import { useSelector } from "react-redux";
+import Tree from "./treeview/Tree";
 
+const TreeviewList = () => {
 
-const TreeviewList = ({list}) => {
-
-    const renderTree = (list) => {
-
-
-                    
-                
-           
-
-    }
-
-
+    let state = useSelector((state => state));
     return (
         <>
-            <TreeView style={{
-                height: 240,
-                maxWidth: 400,
-                flexGrow: 1,
-            }}
+            <h3>State data</h3>
+            <TreeView style={{ height: 200, maxWidth: 400, flexGrow: 1, marginLeft : '10px' }}
                 defaultExpandIcon={<ChevronRightIcon />}
                 defaultCollapseIcon={<ExpandMoreIcon />}
             >
-
-
-
-                 <TreeItem nodeId="0" label="States">
-                    <TreeItem nodeId="1" label="Madhya Pradesh" />
-                    <TreeItem nodeId="2" label="Goa" />
-                    <TreeItem nodeId="3" label="Delhi" />
-                <TreeItem nodeId="1" label="States">
-                    <TreeItem nodeId="8" label="Madhya Pradesh" />
-                    <TreeItem nodeId="9" label="Goa" />
-                    <TreeItem nodeId="10" label="Delhi" />
-                    <TreeItem nodeId="11" label="Mumbai, etc" />
-                </TreeItem>
-                    <TreeItem nodeId="4" label="Mumbai, etc" />
-                </TreeItem>
+                <Tree data={state} />
             </TreeView>
 
         </>
@@ -49,4 +23,4 @@ const TreeviewList = ({list}) => {
 
 }
 
-export default TreeviewList;
+export default React.memo(TreeviewList);

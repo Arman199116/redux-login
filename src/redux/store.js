@@ -5,14 +5,13 @@ const userState = createSlice({
     name : "user",
 
     initialState : {
-        users : [{email : "arman.@gmail.com", password : "sds", name : "sdsdsdsd"}, {email : "arman.ochinyan@gmail.com", password : "sds", name : "sdsdsdsd"},{email : "arman.ghgfhf@gmail.com", password : "sds", name : "sdsdsdsd"}],
-        currentUser : {email : "arman.@gmail.com", password : "sds", name : "sdsdsdsd"},
+        users : [],
+        currentUser : {},
         check : {
             isExists : false,
             incorrectEmOrPass : false,
             signUp : false,
             isLoading : false,
-            isLoadin : false,
         },
         chartDay : 1,
         chartData : {}

@@ -1,51 +1,26 @@
-import React, {useState} from 'react';
-import './Tree.css'
+import React from 'react';
+import TreeItem from '@material-ui/lab/TreeItem';
 
-const Tree = ({data, level}) => {
-    const [show, setShow] = useState(false)
+const Tree = ({data}) => {
 
-    const toggleView = () => {
-        setShow(!show);
+    const tree = (dataObj) => {
+       return Object.keys(dataObj).map((item, i) => {
+            if (typeof dataObj[item] === 'object' || Array.isArray(dataObj[item])) {
+                return  <TreeItem key={i} nodeId={`${Math.random()}`} label={item}>
+                            {tree(dataObj[item])}
+                        </TreeItem>
+            } else {
+                return  <TreeItem key={i} nodeId={`${Math.random()}`} label={`${item} - ${dataObj[item]?.toString()}`} />
+            }
+        })
     }
-    const tree = [];
-    const margin = 20;
-let a = (data, level,tree ) => {
-    if (typeof data === 'object') {
-        for (let obj in data) {
-            // if(data[obj] === null) {
-            //     return <div className="Tree" style={{marginLeft: String((level + 1) * margin) + "px"}} key={obj}>{node.name}</div>
-            // }
-            a(data[obj], level + 1, tree )
-        }
-    } else if (Array.isArray(data)) {
-        for (let i = 0; i < data.length; i++) {
-            a(data[i], level + 1, tree )
-        }
-    } else {
-        tree.push(<div className="Tree" style={{marginLeft: String((level + 1) * margin) + "px"}} key={Date.now()}>{ data   }</div>)
-    }
-}
-a(data, 0, tree)
-    console.log(tree);
-    const sign = show ? " \u2212 " : " + "
 
     return (
         <>
-            <div className="Tree" style={{marginLeft: String(level * margin) + "px"}} onClick={e => toggleView()}>
-                <span className="Sign">{sign}</span>{'root'}
-            </div>
-            {show && tree}
+            {tree(data)}
         </>
     )
 
 }
-/*<Tree
-            key={key}
-            name={node}
-            data={node}
-            level={level + 1}
-            tree={tree}
-          />*
-          
-*/
-export default Tree;
+
+export default React.memo(Tree);
