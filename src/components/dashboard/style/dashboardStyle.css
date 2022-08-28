@@ -1,0 +1,62 @@
+.container {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    align-items: stretch;
+    justify-content: center;
+    gap: 20px;
+    padding: 30px;
+    width: 95%;
+}
+.container-state-data {
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    color: rgb(93, 140, 146);
+    min-height: 150px;
+    overflow: scroll;
+    height: 400px;
+}
+.container-chart {
+    padding: 2rem;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.container-table {
+    min-height: 150px;
+    display: grid;
+    width: 100%;
+    box-shadow: 0 4px 8px 0 #00000033, 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+.user-data {
+    display: grid;
+    grid-template-columns: 70% auto;
+    align-items: center;
+    margin: 10px 10px;
+}
+.user-data > p{
+    color: red;
+}
+.user-data .change-button {
+    padding: 10px 0 10px;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    min-width: 100px;
+}
+
+@media screen and (max-width: 1200px) {
+    .container {
+        grid-template-columns: auto;
+    }
+   
+    .loading-board {
+        width: 400px;
+        height: 300px;
+    }
+
+}

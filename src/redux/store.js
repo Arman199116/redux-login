@@ -5,8 +5,8 @@ const userState = createSlice({
     name : "user",
 
     initialState : {
-        users : [],
-        currentUser : {},
+        users : [{email : "arman.@gmail.com", password : "sds", name : "sdsdsdsd"}, {email : "arman.ochinyan@gmail.com", password : "sds", name : "sdsdsdsd"},{email : "arman.ghgfhf@gmail.com", password : "sds", name : "sdsdsdsd"}],
+        currentUser : {email : "arman.@gmail.com", password : "sds", name : "sdsdsdsd"},
         check : {
             isExists : false,
             incorrectEmOrPass : false,
@@ -23,7 +23,6 @@ const userState = createSlice({
             switch (action.payload.type) {
                 case 'ADDUSER':
                     state.users.push(action.payload.user)
-                   //console.table(  current(state.users)   );
                     break;  
                 default:
                     break;

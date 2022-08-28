@@ -95,20 +95,7 @@ input[type="submit"]:hover {
 .active {
     background-color: #F8FAFD;
 }
-.container {
-    display: grid;
-    grid-template-areas:
-    'left1 rigth1 rigth1'
-    'foothertable foothertable foothertable';
-    align-items: center;
-    justify-content: center;
-    padding: 30px;
-    height: 400px;
-    width: 100%;
-}
-.container > * { 
-    margin-right: 60px;
-}
+
 .user-info {
     grid-area: left1;
     display: flex;
@@ -124,41 +111,11 @@ input[type="submit"]:hover {
     height: 400px;
 }
 .chart-board {
-    grid-area: rigth1;
-    padding: 2rem;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     width: 600px;
     height: 400px;
-}
-.loading-board {
-    grid-area: rigth1;
-    display: grid;
-    justify-content: center;
-    align-items: center; 
 }
 
-.chard-load{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.load-data {
-    display: grid;
-    align-items: center;
-    justify-content: center;
-    width: 600px;
-    height: 400px;
-}
-.users-table {
-    grid-area: foothertable;
-    box-shadow: 0 4px 8px 0 #00000033, 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    margin-top: 30px;
-    gap: 20px;
-}
+
 .icon-container {
     display: flex;
     border: 1px solid black;
@@ -180,52 +137,17 @@ input[type="submit"]:hover {
     cursor: pointer;
     margin-right: 10px;
  }
- .user-data {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    border: 1px solid black;
-    box-shadow: 0 4px 8px 0 #00000033, 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    width: 400px;
-    padding: 10px;
-    margin-top: 10px;
-    margin-bottom: 5px ;
-}
-.user-data > p{
-    color: red;
-}
+
 .change-button {
-    margin: 0 auto;
-    padding: 0;
     cursor: pointer;
     font-size: 15px;
     background: #1b1d1c;
-    border: 1px solid #01d28e;
     color: #fff;
-    padding: 10px 20px;
-    margin-left: auto;
-    order: 2;
+    padding: 10px 10px;
 }
-convas {
-    width: 600px;
-}
+
 @media screen and (max-width: 900px) {
-    .container {
-        flex-direction: column;
-        gap: 30px;
-        grid-template-areas: 'left1 left1 left1'
-                             'rigth1 rigth1 rigth1'
-                             'foothertable foothertable foothertable';
-    }
-    .container > * {
-        width: auto;
-    }
-    .chart-board { 
-        width: auto;
-        height: auto;
-    }
-        
+
     .span-container {
         gap: 30px;
     }

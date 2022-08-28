@@ -63,6 +63,7 @@ function User({email, usersList}) {
                         <AiFillEdit />
                     </div>
                 </div>
+                <hr />
             </>
         );
     } else {
@@ -73,6 +74,7 @@ function User({email, usersList}) {
                     <input onClick={e => {setIsEdit(!isEdit); setNewValue(email);}} type="button" value='Change Email' className="change-button"  />
                 </div>
                 <p style={{display : emailMessage ? 'block' : 'none'}}  >{emailMessage}</p>
+                <hr />
             </>
         );
     }

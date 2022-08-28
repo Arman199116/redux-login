@@ -47,22 +47,22 @@ function ChartJS_2() {
     },[data]);
 
     return (
-        <div className='chard-load'>
+        <>
             <div className="loading-board" style={{display: isLoading ? 'block' : 'none'}}  >
-                <div className="load-data">
-                    <ClipLoader color={'red'} size={100} />
-                    <p>Please wait</p>
-                </div>
-              
-               
+                <ClipLoader color={'red'} size={100} />
+                <p>Please wait</p>
             </div>
 
             <div id="chart" className='chart-board' style={{display: !isLoading ? 'block' : 'none' }}>
                 { HeaderSpans }
                 { lineChartJS }
             </div>
-        </div>
+        </>
     );
 }
 
-export default ChartJS_2;
+
+
+
+
+export default React.memo(ChartJS_2);

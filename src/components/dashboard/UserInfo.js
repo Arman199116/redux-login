@@ -1,9 +1,18 @@
 import React, { useState} from "react";
-import { currentUser } from "../../redux/store";
+import { currentUser , checkUserExists} from "../../redux/store";
 import { useSelector, useDispatch } from "react-redux";
 import { AiFillEdit } from 'react-icons/ai';
 
-const UserInfo = ({ handleSubmit }) => {
+const UserInfo = ( ) => {
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        dispatch(
+            checkUserExists({
+                type: "ISEXISTS",
+                isExists: false,
+            })
+        );
+    };
     let user = useSelector(state => state.currentUser);
 
     const [edit, setEdit] = useState(false);
@@ -76,4 +85,4 @@ const UserInfo = ({ handleSubmit }) => {
     )
 }
 
-export default UserInfo;
+export default React.memo(UserInfo);
