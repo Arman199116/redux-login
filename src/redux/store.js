@@ -107,6 +107,7 @@ const userState = createSlice({
 })
 //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
 export const selectCheckObj = (state) => state.check;
+export const selectUsers = (state) => state.users;
 export const {setUserState, checkUserExists, signUp, showLoading, changeDays, currentUser} = userState.actions;
 const store = configureStore({
     reducer : userState.reducer ,

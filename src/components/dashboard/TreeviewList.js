@@ -2,13 +2,14 @@ import React from "react";
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import TreeView from '@material-ui/lab/TreeView';
-import { useSelector } from "react-redux";
+import { useSelector, shallowEqual } from "react-redux";
 import Tree from "./treeview/Tree";
 import TreeItem from '@material-ui/lab/TreeItem';
 
 const TreeviewList = () => {
 
-    let state = useSelector((state => state));
+    let state = useSelector((state => state), shallowEqual);
+    
     return (
         <>
             <h3>State data</h3>
@@ -16,7 +17,7 @@ const TreeviewList = () => {
                 defaultExpandIcon={<ChevronRightIcon />}
                 defaultCollapseIcon={<ExpandMoreIcon />}
             >
-                <TreeItem  nodeId={`${Math.random()}`} label={'State'}>
+                <TreeItem  nodeId={`0`} label={'State'}>
                     <Tree data={state} />
                 </TreeItem>
             </TreeView>

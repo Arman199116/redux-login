@@ -6,11 +6,11 @@ const Tree = ({data}) => {
     const tree = (dataObj) => {
        return Object.keys(dataObj).map((item, i) => {
             if (typeof dataObj[item] === 'object' || Array.isArray(dataObj[item])) {
-                return  <TreeItem key={i} nodeId={`${Math.random()}`} label={item}>
+                return <TreeItem key={i} nodeId={`${Math.random()}`} label={item}>
                             {tree(dataObj[item])}
-                        </TreeItem>
+                       </TreeItem>
             } else {
-                return  <TreeItem key={i} nodeId={`${Math.random()}`} label={`${item} - ${dataObj[item]?.toString()}`} />
+                return <TreeItem key={i} nodeId={`${Math.random()}`} label={`${item} - ${dataObj[item]?.toString()}`} />
             }
         })
     }

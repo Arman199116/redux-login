@@ -1,9 +1,12 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, shallowEqual } from "react-redux";
 import User from "./User";
+//import { createSelector } from 'reselect';
+import { selectUsers } from "./../../redux/store";
 
+//const unsafeSelector = createSelector(selectUsers, (state) => state.users)
 function UsersTable() {
-    let usersList = useSelector(state => state.users);
+    let usersList = useSelector(selectUsers, shallowEqual);
     return (
         <>
             {

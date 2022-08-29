@@ -10,9 +10,6 @@ import TreeviewList from "./TreeviewList";
 
 function Dashboard() {
 
-    
-
-    
     let charactersId = [
         { classN  : "container-userinfo", components : useMemo(() => <UserInfo />,[]), draggableId : 'userInfo', index : 0 }, 
         { classN  : "container-chart", components : useMemo(() => <ChartJS />,[]), draggableId : 'chartBoard', index : 1 },
@@ -27,24 +24,21 @@ function Dashboard() {
         let items = Array.from(characters);
         const [reorderedItem] = items.splice(result.source.index, 1);
         items.splice(result.destination.index, 0, reorderedItem);
-        setCharacters(items)
+        setCharacters(items);
     }
 
     return (
 
         <DragDropContext onDragEnd={handleOnDragEnd} >
-
             <Droppable droppableId="characters">
                 {
                     (provided) => (
-
                         <div className="container" {...provided.droppableProps} ref={provided.innerRef}>
                             {
                                 characters.map(({classN, components, draggableId, index},i) => {
                                     return (
                                         <DragDrop key={i} classN={classN} components={components} draggableId={draggableId} index={index} />
                                     )
-
                                 })
                             }
                             {provided.placeholder}
@@ -56,4 +50,4 @@ function Dashboard() {
     );
 }
 
-export default Dashboard;
+export default React.memo(Dashboard);

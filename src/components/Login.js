@@ -9,6 +9,7 @@ function Login() {
     const {incorrectEmOrPass, isLoading, } = useSelector(selectCheckObj);
 
     let MemoForm = useMemo(() => <SignInForm />, []);
+    let message = useMemo(() => <Message message="Incorrect Email or Password" show={incorrectEmOrPass} />, [incorrectEmOrPass]);
     
     return (
         <div className="app">
@@ -21,7 +22,7 @@ function Login() {
                     </div>
 
                     <div style={{display : !isLoading ? 'block' : 'none'}}>
-                        <Message message="Incorrect Email or Password" show={incorrectEmOrPass} />
+                        {message}
                         { MemoForm }
                     </div>
                 </div>
@@ -30,4 +31,4 @@ function Login() {
     );
 }
 
-export default Login;
+export default React.memo(Login);

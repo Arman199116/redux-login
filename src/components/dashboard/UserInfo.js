@@ -1,9 +1,9 @@
 import React, { useState} from "react";
 import { currentUser , checkUserExists} from "../../redux/store";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch, shallowEqual } from "react-redux";
 import { AiFillEdit } from 'react-icons/ai';
 
-const UserInfo = ( ) => {
+const UserInfo = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         dispatch(
@@ -13,7 +13,7 @@ const UserInfo = ( ) => {
             })
         );
     };
-    let user = useSelector(state => state.currentUser);
+    let user = useSelector(state => state.currentUser, shallowEqual);
 
     const [edit, setEdit] = useState(false);
     const [newValue, setNewValue] = useState(user.email);
@@ -51,7 +51,6 @@ const UserInfo = ( ) => {
                             oldEmail : user.email
                         }
                     }));
-                    
                 }
             } 
         }

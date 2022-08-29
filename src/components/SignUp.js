@@ -83,7 +83,9 @@ function SignUp() {
         }
         return errors;
     }
-    let linkP = useMemo(() =><p><small>Already have an account?</small><Link to="/">Log In</Link></p>,[])
+    let linkP = useMemo(() =><p><small>Already have an account?</small><Link to="/">Log In</Link></p>,[]);
+    let submit = useMemo(() => <Submit value="Submit" /> ,[]);
+    let message = useMemo(() => <Message show={Object.keys(formErrors).length === 0 && isSubmit} message='You just signed up' />,[formErrors, isSubmit] );
     return (
         <div className="app">
             <div className="login-form">
@@ -94,7 +96,7 @@ function SignUp() {
                         <p>Please wait</p>
                     </div>
 
-                    <Message show={Object.keys(formErrors).length === 0 && isSubmit} message='You just signed up' />
+                    {message}
                     <form onSubmit={(e) => {handleSubmit(e) }} style={{display : !isLoading ? 'block' : 'none'}} >
                         <div className="input-container">
                             <label>Name</label>
@@ -149,7 +151,7 @@ function SignUp() {
                         >
                             {linkP}
                         </div>
-                        <Submit value="Submit" />
+                        {submit}
                     </form>
                 </div>
             </div>
