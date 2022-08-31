@@ -1,9 +1,10 @@
 import React, { useState} from "react";
-import { currentUser , checkUserExists} from "../../redux/store";
-import { useSelector, useDispatch, shallowEqual } from "react-redux";
+import { currentUser , checkUserExists, selectCurrentUser} from "../../redux/store";
+import { useDispatch, connect } from "react-redux";
 import { AiFillEdit } from 'react-icons/ai';
+import { createSelector } from 'reselect';
 
-const UserInfo = () => {
+const UserInfo = ({ user }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         dispatch(
@@ -13,7 +14,7 @@ const UserInfo = () => {
             })
         );
     };
-    let user = useSelector(state => state.currentUser, shallowEqual);
+    //let user = useSelector(state => state.currentUser, shallowEqual);
 
     const [edit, setEdit] = useState(false);
     const [newValue, setNewValue] = useState(user.email);
@@ -43,7 +44,7 @@ const UserInfo = () => {
                     dispatch(currentUser({
                         type : 'ADDCURRENTUSER',
                         user : {...user, email : newValue}
-                    }))
+                    }));
                     dispatch(currentUser({
                         type : 'CHANGEEMAIL',
                         email : {
@@ -69,12 +70,12 @@ const UserInfo = () => {
                         </span>
                     </div>
                 :
-                    <div>Email { user.email }</div>  
+                    <div>Email { user.email }</div>
             }
 
             <p style={{display : emailMessage ? 'block' : 'none'}}  >{emailMessage}</p>
             <div className="button-container">
-                <input type="submit" value="Change Email"   />
+                <input type="submit" value="Change Email"  />
             </div>
 
             <div className="button-container">
@@ -83,5 +84,14 @@ const UserInfo = () => {
         </form>
     )
 }
+let getCurrentUser = createSelector([ selectCurrentUser ], (currentUser) => {
+    console.log('new state currentuser');
+    return { currentUser };
+});
 
-export default React.memo(UserInfo);
+const mapStateToProps = (state) => {
+    const { currentUser } = getCurrentUser(state);
+    return  { user : currentUser }
+}
+
+export default connect(mapStateToProps)(UserInfo)

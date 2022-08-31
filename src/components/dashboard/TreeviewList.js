@@ -2,14 +2,15 @@ import React from "react";
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import TreeView from '@material-ui/lab/TreeView';
-import { useSelector, shallowEqual } from "react-redux";
+import { selectState } from './../../redux/store'
+import { connect } from "react-redux";
 import Tree from "./treeview/Tree";
 import TreeItem from '@material-ui/lab/TreeItem';
+import { createSelector } from 'reselect';
 
-const TreeviewList = () => {
+const TreeviewList = ({ state }) => {
 
-    let state = useSelector((state => state), shallowEqual);
-    
+    //let state = useSelector((state => state));
     return (
         <>
             <h3>State data</h3>
@@ -21,10 +22,17 @@ const TreeviewList = () => {
                     <Tree data={state} />
                 </TreeItem>
             </TreeView>
-
         </>
     )
-
+}
+let getState = createSelector([ selectState ], (state) => {
+    console.log('new state treeview');
+    return { stateObj : state }
+});
+const mapStateToProps = (state) => {
+    const { stateObj } = getState(state);
+    return { state : stateObj }
 }
 
-export default React.memo(TreeviewList);
+export default connect(mapStateToProps)(TreeviewList)
+

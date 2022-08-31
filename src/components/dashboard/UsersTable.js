@@ -1,21 +1,31 @@
 import React from "react";
-import { useSelector, shallowEqual } from "react-redux";
+import { connect } from "react-redux";
 import User from "./User";
-//import { createSelector } from 'reselect';
-import { selectUsers } from "./../../redux/store";
+import { createSelector } from 'reselect';
+import { selectUsers} from "./../../redux/store";
 
-//const unsafeSelector = createSelector(selectUsers, (state) => state.users)
-function UsersTable() {
-    let usersList = useSelector(selectUsers, shallowEqual);
+
+function UsersTable({users}) {
+    //let users = useSelector(selectUsers);
     return (
         <>
             {
-                usersList.map((item, i) => {
-                    return <User key={i} email={item.email} usersList={usersList} />
+                users.map((item, i) => {
+                    return <User key={i} email={item.email} usersList={users} />
                 })
             }
          </>
     );
 }
 
-export default React.memo(UsersTable);
+let getUsers = createSelector([ selectUsers ], (users) => {
+    console.log('new state users');
+    return { users };
+});
+
+const mapStateToProps = (state) => {
+    const { users } = getUsers(state);
+    return  { users };
+}
+
+export default connect(mapStateToProps)(UsersTable);

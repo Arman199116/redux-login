@@ -17,7 +17,7 @@ const Tree = ({data}) => {
 
     return (
         <>
-            {tree(data)}
+            { tree(data) }
         </>
     )
 

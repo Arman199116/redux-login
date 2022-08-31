@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { AiFillEdit } from 'react-icons/ai';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector, connect } from 'react-redux';
 import { currentUser } from "./../../redux/store";
 
 function User({email, usersList}) {
@@ -9,7 +9,7 @@ function User({email, usersList}) {
     let currentUserEmail = useSelector(state => state.currentUser.email);
 
     const [emailMessage, setEmailMessage] = useState('');
-    const [newValue, setNewValue] = useState(email)
+    const [newValue, setNewValue] = useState(email);
 
     const handleEditEmail = (e) => {
         e.preventDefault();
@@ -25,7 +25,7 @@ function User({email, usersList}) {
         }
 
         if (newValue) {
-            for (let i = 0; i < usersList.length; i++) {       
+            for (let i = 0; i < usersList.length; i++) {
                 if (newValue === usersList[i].email) {
                     setEmailMessage("Email allrady is used");
                     setIsEdit(false);
@@ -79,5 +79,10 @@ function User({email, usersList}) {
         );
     }
 }
+const mapStateToProps = (state) => {
+    const tracks = state.usersList;
+    return  { tracks } 
+}
 
-export default User;
+export default connect(mapStateToProps)(User)
+//export default User;

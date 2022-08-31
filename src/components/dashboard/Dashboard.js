@@ -1,52 +1,84 @@
 import "./style/dashboardStyle.css";
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState ,useRef} from "react";
 import UserInfo from "./UserInfo";
 import ChartJS from "./../reactchartjs/ReactChartJS";
 import UsersTable from "./UsersTable";
-import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import DragDrop from "./DragDrop";
 import TreeviewList from "./TreeviewList";
 
 
 function Dashboard() {
 
-    let charactersId = [
-        { classN  : "container-userinfo", components : useMemo(() => <UserInfo />,[]), draggableId : 'userInfo', index : 0 }, 
-        { classN  : "container-chart", components : useMemo(() => <ChartJS />,[]), draggableId : 'chartBoard', index : 1 },
-        { classN  : "container-table", components : useMemo(() => <UsersTable />,[]), draggableId : 'UsersLists', index : 2 },
-        { classN  : "container-state-data", components : useMemo(() => <TreeviewList/>,[] ), draggableId : 'viewTree', index : 3 }
+    let cardList = [
+        { classN  : "container-userinfo", components : useMemo(() => <UserInfo />,[]), id : 1, order : 3 }, 
+        { classN  : "container-chart", components : useMemo(() => <ChartJS />,[]), id : 2, order : 1 },
+        { classN  : "container-table", components : useMemo(() => <UsersTable />,[]), id : 3, order : 2 },
+        { classN  : "container-state-data", components : useMemo(() => <TreeviewList />,[] ), id : 4, order : 4 }
     ];
 
-    let [characters, setCharacters] = useState(charactersId);
-    const handleOnDragEnd = (result) => {
-        if (!result.destination) return;
+    let [cards, setCard] = useState(cardList);
+    let currentCard = useRef(null);
 
-        let items = Array.from(characters);
-        const [reorderedItem] = items.splice(result.source.index, 1);
-        items.splice(result.destination.index, 0, reorderedItem);
-        setCharacters(items);
+    const dragStartHandler = (e, card) => {
+       
+        currentCard.current = card;
+        console.log('start ', currentCard);
+    }
+    const dragEndHandler = (e) => {
+        //e.target.style.background = 'white';
     }
 
+    const dragOverHandler = (e) => {
+        e.preventDefault();
+    }
+    const dropHandler = (e, card) => {
+        
+        
+        setCard(cards.map((c) => {
+            if (c.id === card.id) {
+                return {...c, order : currentCard.current.order};
+            }
+             if (c.id === currentCard.current.id) {
+                return {...c, order : card.order};
+            }
+            if (c.id !== card.id) {return c; };
+        }));
+        e.preventDefault();
+
+
+    }
+    const sortCard = (a, b) => {
+        if (a.order > b.order) {
+            return 1;
+        } else {
+            return -1;
+        }
+    }
+
+    
     return (
 
-        <DragDropContext onDragEnd={handleOnDragEnd} >
-            <Droppable droppableId="characters">
-                {
-                    (provided) => (
-                        <div className="container" {...provided.droppableProps} ref={provided.innerRef}>
-                            {
-                                characters.map(({classN, components, draggableId, index},i) => {
-                                    return (
-                                        <DragDrop key={i} classN={classN} components={components} draggableId={draggableId} index={index} />
-                                    )
-                                })
-                            }
-                            {provided.placeholder}
+        <div className="container" >
+            {
+                cards.sort(sortCard).map((card, i) => {
+                    return (
+                        <div
+                            onDragStart={(e) => dragStartHandler(e, card)}
+                            onDragLeave={(e) => dragEndHandler(e) }
+                            onDragEnd={(e) => dragEndHandler(e) }
+                            onDrop={(e) => dragOverHandler(e)}
+                            onDragOver={(e) => dropHandler(e, card) }
+                            draggable={true}
+                            key={i}
+                            className={card.classN}
+                        >
+                            {card.components}  
                         </div>
                     )
-                }
-            </Droppable>
-        </DragDropContext>
+                })
+            }
+
+        </div>
     );
 }
 

@@ -17,6 +17,7 @@ input[type="email"],
 input[type="password"] {
     height: 25px;
     border: 1px solid rgba(0, 0, 0, 0.2);
+    outline: none;
 }
 
 input[type="submit"] {
@@ -144,6 +145,10 @@ input[type="submit"]:hover {
     width: 400px;
     text-align: center;
 }
+.message-component {
+    color: red;
+}
+
 @media screen and (max-width: 900px) {
 
     .span-container {
