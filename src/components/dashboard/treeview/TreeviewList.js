@@ -2,9 +2,9 @@ import React from "react";
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import TreeView from '@material-ui/lab/TreeView';
-import { selectState } from './../../redux/store'
+import { selectState } from '../../../redux/store'
 import { connect } from "react-redux";
-import Tree from "./treeview/Tree";
+import Tree from "./Tree";
 import TreeItem from '@material-ui/lab/TreeItem';
 import { createSelector } from 'reselect';
 
