@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { AiFillEdit } from 'react-icons/ai';
 import { useDispatch, useSelector, connect } from 'react-redux';
-import { currentUser } from "./../../redux/store";
+import { currentUser, selectCurrentUser } from "./../../redux/store";
+import { createSelector } from 'reselect';
 
-function User({email, usersList}) {
+function User({email, usersList, currentUserEmail}) {
     const [isEdit, setIsEdit] = useState(false);
     const dispatch = useDispatch();
-    let currentUserEmail = useSelector(state => state.currentUser.email);
+    //let currentUserEmail = useSelector(state => state.currentUser.email);
 
     const [emailMessage, setEmailMessage] = useState('');
     const [newValue, setNewValue] = useState(email);
@@ -79,10 +80,13 @@ function User({email, usersList}) {
         );
     }
 }
+let currentUserEmail = createSelector([ selectCurrentUser ], (user) => {
+    console.log('new current email');
+    return { email : user.email };
+});
 const mapStateToProps = (state) => {
-    const tracks = state.usersList;
-    return  { tracks } 
+    const { email } = currentUserEmail(state);
+    return  { currentUserEmail : email }
 }
 
-export default connect(mapStateToProps)(User)
-//export default User;
+export default connect(mapStateToProps)(User);

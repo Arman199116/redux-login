@@ -2,11 +2,10 @@ import React from "react";
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import TreeView from '@material-ui/lab/TreeView';
+import { createSelector } from 'reselect';
 import { selectState } from '../../../redux/store'
 import { connect } from "react-redux";
 import Tree from "./Tree";
-import TreeItem from '@material-ui/lab/TreeItem';
-import { createSelector } from 'reselect';
 
 const TreeviewList = ({ state }) => {
 
@@ -17,10 +16,9 @@ const TreeviewList = ({ state }) => {
             <TreeView style={{ height: 200, maxWidth: 400, flexGrow: 1, marginLeft : '10px' }}
                 defaultExpandIcon={<ChevronRightIcon />}
                 defaultCollapseIcon={<ExpandMoreIcon />}
+                expandtoselected={'false'}
             >
-                <TreeItem  nodeId={`0`} label={'State'}>
-                    <Tree data={state} />
-                </TreeItem>
+                <Tree data={{'State' :  state}} />
             </TreeView>
         </>
     )

@@ -53,10 +53,14 @@ function ChartJS_2({days, dayData}) {
 
     return (
         <>
-            <div className="loading-board" style={{display: isLoading ? 'block' : 'none'}}  >
-                <ClipLoader color={'red'} size={100} />
-                <p>Please wait</p>
-            </div>
+        {
+            isLoading && (
+                <div className="loading-board" style={{display: isLoading ? 'block' : 'none'}}  >
+                    <ClipLoader color={'red'} size={100} />
+                    <p>Please wait</p>
+                </div>
+            )
+        }
 
             <div id="chart" className='chart-board' style={{display: !isLoading ? 'block' : 'none' }}>
                 { HeaderSpans }

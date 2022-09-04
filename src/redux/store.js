@@ -22,7 +22,7 @@ const userState = createSlice({
             switch (action.payload.type) {
                 case 'ADDUSER':
                     state.users.push(action.payload.user)
-                    break;  
+                    break;
                 default:
                     break;
             }
