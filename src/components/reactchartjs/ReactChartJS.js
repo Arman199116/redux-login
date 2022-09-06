@@ -26,7 +26,6 @@ function ChartJS_2({days, dayData}) {
     });
 
     const HeaderSpans = useMemo(() => <HeaderToolBar />, [])
-    const lineChartJS = useMemo(() => <Line data={data} width='390px' options={optionsChartjs_2} />, [data])
 
     useEffect(() => {
         setIsloading(true);
@@ -47,6 +46,7 @@ function ChartJS_2({days, dayData}) {
         }
 
     },[days, dispatch, dayData]);
+
     useEffect(() => {
         setIsloading(false);
     },[data]);
@@ -64,7 +64,7 @@ function ChartJS_2({days, dayData}) {
 
             <div id="chart" className='chart-board' style={{display: !isLoading ? 'block' : 'none' }}>
                 { HeaderSpans }
-                { lineChartJS }
+                <Line data={data} width='390px' options={optionsChartjs_2} />
             </div>
         </>
     );

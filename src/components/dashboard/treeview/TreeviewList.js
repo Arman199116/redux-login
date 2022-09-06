@@ -16,7 +16,6 @@ const TreeviewList = ({ state }) => {
             <TreeView style={{ height: 200, maxWidth: 400, flexGrow: 1, marginLeft : '10px' }}
                 defaultExpandIcon={<ChevronRightIcon />}
                 defaultCollapseIcon={<ExpandMoreIcon />}
-                expandtoselected={'false'}
             >
                 <Tree data={{'State' :  state}} />
             </TreeView>

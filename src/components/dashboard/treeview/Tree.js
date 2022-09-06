@@ -3,14 +3,16 @@ import TreeItem from '@material-ui/lab/TreeItem';
 
 const Tree = ({ data }) => {
 
-    const tree = (dataObj) => {
+    const tree = (dataObj, nodeId = 0 ) => {
+
        return Object.keys(dataObj).map((item) => {
+            nodeId++;
             if (typeof dataObj[item] === 'object' || Array.isArray(dataObj[item])) {
-                return <TreeItem  expandtoselected={'false'}  key={item} nodeId={`${item}`} label={item}>
-                            {tree(dataObj[item])}
+                return <TreeItem  key={item + nodeId} nodeId={`${item + nodeId}`} label={item}>
+                            {tree(dataObj[item], nodeId)}
                        </TreeItem>
             } else {
-                return <TreeItem  expandtoselected={'false'} key={item} nodeId={`${item}`} label={`${item} - ${dataObj[item]?.toString()}`} />
+                return <TreeItem key={item + nodeId} nodeId={`${item + nodeId}`} label={`${item} - ${dataObj[item]?.toString()}`} />
             }
         })
     }

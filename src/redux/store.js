@@ -60,11 +60,15 @@ const userState = createSlice({
         changeDays : (state, action) => {
             switch (action.payload.type) {
                 case 'CHANGEDAYS':
-                    state.chartDay = action.payload.chartDay
-                    break;
+                    return {
+                        ...state,
+                        chartDay : action.payload.chartDay
+                    }
                 case 'ADDNEWDATA':
-                    state.chartData[action.payload.data.day] = action.payload.data.value 
-                    break;
+                    return {
+                        ...state,
+                        chartData : {...state.chartData, [action.payload.data.day] : action.payload.data.value }
+                    }
                 default:
                     break;
             }
