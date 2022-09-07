@@ -104,13 +104,13 @@ const userState = createSlice({
     }
 
 })
-//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
+//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
 export const selectCheckObj = (state) => state.check;
 export const selectUsers = (state) => state.users;
 export const selectCurrentUser = (state) => state.currentUser;
 export const selectState = (state) => state;
 export const selectChartDay = (state) => state.chartDay;
-export const selectChartData = (state) => state.chartData;
+export const selectChartData = (state) => state.chartData[state.chartDay];
 export const {setUserState, checkUserExists, signUp, showLoading, changeDays, currentUser} = userState.actions;
 const store = configureStore({
     reducer : userState.reducer,

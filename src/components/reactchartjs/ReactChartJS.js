@@ -73,7 +73,7 @@ function ChartJS_2({days, dayData}) {
 let getChartValue = createSelector([ selectChartData, selectChartDay ], (chartData, chartDay) => {
     console.log('new chart data');
     return {
-        dayData : chartData[chartDay],
+        dayData : chartData,
         days : chartDay
     };
 });
