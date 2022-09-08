@@ -1,18 +1,22 @@
 import React from 'react';
-import TreeItem from '@material-ui/lab/TreeItem';
+//import TreeItem from '@material-ui/lab/TreeItem';
 
 const Tree = ({ data }) => {
 
+    let handleShow = (e) => {
+        e.target.style.display = 'block';
+    }
+
     const tree = (dataObj, nodeId = 0 ) => {
 
-       return Object.keys(dataObj).map((item) => {
-            nodeId++;
+        return Object.keys(dataObj).map((item) => {
+
             if (typeof dataObj[item] === 'object' || Array.isArray(dataObj[item])) {
-                return <TreeItem  key={item + nodeId} nodeId={`${item + nodeId}`} label={item}>
-                            {tree(dataObj[item], nodeId)}
-                       </TreeItem>
+                return <div style={{display : 'none'}} onClick={(e) => handleShow(e)}  key={item + nodeId} >{item}
+                             {tree(dataObj[item], ++nodeId)}
+                       </div>
             } else {
-                return <TreeItem key={item + nodeId} nodeId={`${item + nodeId}`} label={`${item} - ${dataObj[item]?.toString()}`} />
+                return <div key={item + nodeId}>{`_`.repeat(nodeId)}{`${item} - ${dataObj[item]?.toString()}`} </div>
             }
         })
     }
