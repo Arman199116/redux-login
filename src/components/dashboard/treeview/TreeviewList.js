@@ -1,24 +1,22 @@
-import React, {useState } from "react";
+import React from "react";
 import { createSelector } from 'reselect';
 import { selectState } from '../../../redux/store'
 import { connect } from "react-redux";
 import Tree from "./Tree";
+import './tree.css';
 
 const TreeviewList = ({ state }) => {
-
-
-    let [show, setShow] = useState(false);
 
     return (
         <>
             <h3>State data</h3>
-            <div onClick={(e) => setShow(!show)} >State</div>
-            <Tree data ={state} defaultShow={show} nodeId={0}/>
+            <ul id="myUL">
+                <Tree data = {{State : state}} toRigth={0}/>
+            </ul>
         </>
     )
 }
 let getState = createSelector([ selectState ], (state) => {
-    console.log('new state treeview');
     return { stateObj : state }
 });
 const mapStateToProps = (state) => {

@@ -1,42 +1,29 @@
-import React, { useRef, useState} from 'react';
-//import TreeItem from '@material-ui/lab/TreeItem';
+import React from 'react';
 
-const Tree = ({ data, defaultShow, nodeId }) => {
+const Tree = ({ data, toRigth }) => {
 
-    let [show, setShow] = useState(false);
-    let divRef = useRef(false);
-
-
-    // const tree = (dataObj, defaultShow, nodeId = 0 ) => {
-    //     nodeId++;
-    //     console.log(defaultShow);
-        
-    // }
-    nodeId++
+    let handleOpen = (e) => {
+        e.target.parentElement.querySelector(".nested").classList.toggle("active");
+        e.target.classList.toggle("caret-down");
+    }
+    toRigth++;
     return (
         <>
-        {
-            
-            Object.keys(data).map((item) => {
+        {Object.keys(data).map((item) => {
 
-                if (typeof data[item] === 'object' || Array.isArray(data[item])) {
-                    return <div style={{display : defaultShow ? 'block' : 'none'}} 
-                                onClick={(e) => {
-                                    e.stopPropagation();
-                                    setShow(!show);
-                                    divRef.current = !divRef.current;
-                                }}
-                                key={item + nodeId}
-                        >
-                                {' .'.repeat(nodeId)}{item}
-                                <Tree data={data[item]} defaultShow={divRef.current} nodeId={nodeId} />
-                        </div>
-                } else {
-                    return <div style={{display : defaultShow ? 'block' : 'none'}} key={item + nodeId}>{' .'.repeat(nodeId)}{`${item} - ${data[item]?.toString()}`}</div>
-                }
-                
-            })
-        }
+            if (typeof data[item] === 'object' || Array.isArray(data[item])) {
+                return <li key={Math.random() + toRigth} >
+                            {'. '.repeat(toRigth)}
+                            <span className="caret" onClick={ (e) => handleOpen(e)}>{item}</span>
+                            <ul className="nested">
+                                <Tree data={data[item]} toRigth={toRigth} />
+                            </ul>
+                        </li>
+            } else {
+                return <li key={Math.random() + toRigth}>{'. '.repeat(toRigth)}{`${item} : ${data[item]?.toString()}`}</li>
+            }
+
+        })}
         </>
     )
 }
