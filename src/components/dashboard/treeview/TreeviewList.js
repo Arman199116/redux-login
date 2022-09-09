@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState } from "react";
 import { createSelector } from 'reselect';
 import { selectState } from '../../../redux/store'
 import { connect } from "react-redux";
@@ -7,18 +7,13 @@ import Tree from "./Tree";
 const TreeviewList = ({ state }) => {
 
 
-    let [trees, setTrees] = useState([])
-    let handleShow = (e) => {
-        e.target.style.display = 'block';
-    }
-    
+    let [show, setShow] = useState(false);
 
-    
     return (
         <>
             <h3>State data</h3>
-            <button onClick={(e) => handleShow(e)} >State</button>
-            <Tree data ={state} />
+            <div onClick={(e) => setShow(!show)} >State</div>
+            <Tree data ={state} defaultShow={show} nodeId={0}/>
         </>
     )
 }

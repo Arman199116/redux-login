@@ -1,29 +1,42 @@
-import React from 'react';
+import React, { useRef, useState} from 'react';
 //import TreeItem from '@material-ui/lab/TreeItem';
 
-const Tree = ({ data }) => {
+const Tree = ({ data, defaultShow, nodeId }) => {
 
-    let handleShow = (e) => {
-        e.target.style.display = 'block';
-    }
+    let [show, setShow] = useState(false);
+    let divRef = useRef(false);
 
-    const tree = (dataObj, nodeId = 0 ) => {
 
-        return Object.keys(dataObj).map((item) => {
-
-            if (typeof dataObj[item] === 'object' || Array.isArray(dataObj[item])) {
-                return <div style={{display : 'none'}} onClick={(e) => handleShow(e)}  key={item + nodeId} >{item}
-                             {tree(dataObj[item], ++nodeId)}
-                       </div>
-            } else {
-                return <div key={item + nodeId}>{`_`.repeat(nodeId)}{`${item} - ${dataObj[item]?.toString()}`} </div>
-            }
-        })
-    }
-
+    // const tree = (dataObj, defaultShow, nodeId = 0 ) => {
+    //     nodeId++;
+    //     console.log(defaultShow);
+        
+    // }
+    nodeId++
     return (
         <>
-            { tree(data) }
+        {
+            
+            Object.keys(data).map((item) => {
+
+                if (typeof data[item] === 'object' || Array.isArray(data[item])) {
+                    return <div style={{display : defaultShow ? 'block' : 'none'}} 
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    setShow(!show);
+                                    divRef.current = !divRef.current;
+                                }}
+                                key={item + nodeId}
+                        >
+                                {' .'.repeat(nodeId)}{item}
+                                <Tree data={data[item]} defaultShow={divRef.current} nodeId={nodeId} />
+                        </div>
+                } else {
+                    return <div style={{display : defaultShow ? 'block' : 'none'}} key={item + nodeId}>{' .'.repeat(nodeId)}{`${item} - ${data[item]?.toString()}`}</div>
+                }
+                
+            })
+        }
         </>
     )
 }
