@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useMemo} from "react";
 import  "chart.js/auto";
 import getData from "./data/fetch_data";
-import { optionsChartjs_2 } from "./options";
+import { optionsChartjs_2 } from "./graph/options";
 import { dataLabel } from "./data/dataLabel";
 import { useDispatch, connect } from "react-redux";
 import { Line } from "react-chartjs-2";

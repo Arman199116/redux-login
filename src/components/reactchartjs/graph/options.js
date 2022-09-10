@@ -78,20 +78,8 @@ export const options = {
 
 export let optionsChartjs_2 = {
     elements: { point: { radius: 0 } } ,
-    animation: {
-        duration: 2000,
-        onProgress: function(animation) {
-            progress.value = animation.currentStep / animation.numSteps;
-        },
-        onComplete: function(animation) {
-            window.setTimeout(function() {
-                progress.value = 0;
-            }, 2000);
-        }
-    },
     plugins: {
         crosshair: {
-       
             line: {
                 color: "#d1d1d1",
                 width: 2,

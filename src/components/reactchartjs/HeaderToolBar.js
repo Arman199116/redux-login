@@ -3,7 +3,6 @@ import Span from './graph/CreateSpan';
 import { useDispatch } from "react-redux";
 import { changeDays  } from "./../../redux/store";
 
-
 const HeaderToolBar = () => {
     const dispatch = useDispatch();
     const containerRef = useRef();
@@ -38,8 +37,6 @@ const HeaderToolBar = () => {
             </div>
         </div>
     )
-
 }
-
 
 export default HeaderToolBar;

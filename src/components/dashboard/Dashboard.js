@@ -34,14 +34,7 @@ function Dashboard() {
                 return {...c, order : card.order};
             }
             return c;
-        }).sort(sortCard));
-    }
-    const sortCard = (a, b) => {
-        if (a.order > b.order) {
-            return 1;
-        } else {
-            return -1;
-        }
+        }).sort((a, b) => a.order - b.order));
     }
 
     return (
