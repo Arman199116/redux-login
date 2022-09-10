@@ -1,29 +1,28 @@
 import React from 'react';
 
-const Tree = ({ data, toRigth }) => {
+const Tree = ({ data, toRight }) => {
 
     let handleOpen = (e) => {
         e.target.parentElement.querySelector(".nested").classList.toggle("active");
         e.target.classList.toggle("caret-down");
     }
-    toRigth++;
+    toRight++;
     return (
         <>
-        {Object.keys(data).map((item) => {
+            {Object.keys(data).map((item) => {
 
-            if (typeof data[item] === 'object' || Array.isArray(data[item])) {
-                return <li key={Math.random() + toRigth} >
-                            {'. '.repeat(toRigth)}
-                            <span className="caret" onClick={ (e) => handleOpen(e)}>{item}</span>
-                            <ul className="nested">
-                                <Tree data={data[item]} toRigth={toRigth} />
-                            </ul>
-                        </li>
-            } else {
-                return <li key={Math.random() + toRigth}>{'. '.repeat(toRigth)}{`${item} : ${data[item]?.toString()}`}</li>
-            }
+                if (typeof data[item] === 'object' || Array.isArray(data[item])) {
+                    return <li style={{paddingLeft : toRight * 8 + 'px'}} key={Math.random() + toRight}>
+                                <span className="caret" onClick={ (e) => handleOpen(e)}>{item}</span>
+                                <ul className="nested">
+                                    <Tree data={data[item]} toRight={toRight} />
+                                </ul>
+                            </li>
+                } else {
+                    return <li style={{paddingLeft : toRight * 8 + 'px'}} key={Math.random() + toRight}>{`${item} : ${data[item]?.toString()}`}</li>
+                }
 
-        })}
+            })}
         </>
     )
 }

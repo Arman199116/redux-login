@@ -11,7 +11,7 @@ const TreeviewList = ({ state }) => {
         <>
             <h3>State data</h3>
             <ul id="myUL">
-                <Tree data = {{State : state}} toRigth={0}/>
+                <Tree data = {{State : state}} toRight={0}/>
             </ul>
         </>
     )
